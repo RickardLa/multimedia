@@ -1,4 +1,4 @@
-%% Step 1.1
+%% Step 1.1 Generate a stationary speech signal file
 clc
 clf
 clear 
@@ -18,6 +18,7 @@ disp('STOP')
 y = getaudiodata(recObj);                   % Save audio as a double 
 audiowrite('Vowel.wav', y, Fs)              % Save as .wav in path
 t = 0:1/Fs:(length(y)-1)/Fs;                % Convert samples to time
+
 
 
 % Plotting time-domain signal 
@@ -42,7 +43,7 @@ title('Single tone zoomed in')
 % title('FFT of single tone')
 
 
-%% Step 1.2
+%% Step 1.2 Estimate the LPC model parameters
 clc
 clf
 clear 
@@ -50,26 +51,41 @@ close all
 
 p = 12;             % Model order
 Ts = 0.3;           % Block size [s]
-startSample = 1;    % What sample the block will start at 
+startSample = 100;    % What sample the block will start at 
 
-[y, Fs] = audioread('Vowel.wav');           % Read file from step 1.1 
-y = y(startSample:startSample + Ts*Fs-1);   % Extract block of Ts seconds
-t = 0:1/Fs:(length(y)-1)/Fs;                % Convert samples to time
+[y, Fs] = audioread('Vowel.wav');                 % Read file from step 1.1 
+y_block = y(startSample:startSample + Ts*Fs-1);   % Extract block of Ts seconds
 
-
-% plot(t,y)
-% xlabel('Time [s]')
 
 % LPC on segment. 'A' contains model parameters, 'E' is the variance of the
 % prediction errors 
-[A, E] = lpc(y,p)
+[a, E] = lpc(y_block,p)
 
 
-%% Step 1.3
-clc
-clf
-clear 
-close all
+%% Step 1.3 Calculate the residual sequence e(n)
 
 
+t = 0:1/Fs:(length(y_block)-1)/Fs;
+e = filter(1,a,y_block);              % Filter speech signal with A(z) to get residual sequence
+
+
+
+plot(t,e)
+hold on
+plot(t,y_block)
+grid on
+xlabel('Time [s]')
+legend('Residual sequence', 'Original speech signal')
+
+
+%% Step 1.4 Re-synthesize the speech using the estimated parameters
+
+y_resynth = filter(1,1/a(:),e);
+
+plot(t,y_resynth)
+hold on
+plot(t,y_block)
+grid on
+xlabel('Time [s]')
+legend('Re-synthesized speech', 'Original speech signal')
 
