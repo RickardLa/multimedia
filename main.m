@@ -8,7 +8,7 @@ Fs = 12e3;            % Sampling frequency
 Ts = 3;               % Duration of recording
 nChannels= 1;         % Number of channels
 
-% hej
+
 
 recObj = audiorecorder(Fs, 8, nChannels);   % Create audiorecorder object
 disp('START')
