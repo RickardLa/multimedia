@@ -18,7 +18,7 @@ disp('STOP')
 y = getaudiodata(recObj);                   % Save audio as a double 
 audiowrite('Vowel.wav', y, Fs)              % Save as .wav in path
 t = 0:1/Fs:(length(y)-1)/Fs;                % Convert samples to time
-
+s
 
 
 % Plotting time-domain signal 
