@@ -57,12 +57,12 @@ y_block = s(startSample:startSample + Ts*Fs-1);   % Extract block of Ts seconds
 % LPC on segment. 'A' contains model parameters, 'E' is the variance of the
 % prediction errors 
 [a, E] = lpc(y_block,p);
-
+% KOLLA VAD SOM SKA SKE MED GAIN, G, tror det är vårt E vi får
 
 %% Step 1.3 Calculate the residual sequence e(n)
 t = 0:1/Fs:(length(y_block)-1)/Fs;
-e = filter(a,E,y_block);              % Filter speech signal with A(z) to get residual sequence
-
+e = filter(a,1,y_block)/E;              % Filter speech signal with A(z) to get residual sequence
+% KOLLA VAD SOM SKA SKE MED GAIN, G, tror det är vårt E vi får
 figure
 plot(t,e)
 hold on
@@ -74,7 +74,7 @@ legend('Residual sequence', 'Original speech signal')
 
 %% Step 1.4 Re-synthesize the speech using the estimated parameters
 
-y_resynth = filter(E,a(:),e);
+y_resynth = filter(E,a(:),e); % KOLLA VAD SOM SKA SKE MED GAIN, G, tror det är vårt E vi får
 
 figure
 subplot(2,1,1)
@@ -183,3 +183,59 @@ plot(t,s_hat)
 grid on
 xlabel('Time [s]')
 legend('Re-synthesis sequence')
+
+% ------------------------------------------------------------------------
+% -------------------- TASK 3 -------------------------------------------
+% ------------------------------------------------------------------------
+
+%% Step 3.1 Form modified residual sequence e_tilde
+% Use the residual sequence e_hat formed in 2.3
+clc, close all, 
+e_tilde = zeros(length(e_hat),1);
+K = L/4;
+
+for i=1:totBlocks
+    sigVals = maxk(abs(e_hat((i-1)*L+1:L*i)),K);    % Find most significant vals
+    [~,loc]=ismember(abs(e_hat),sigVals);       % Check positions
+    indx = find(loc);                           % Extract non-zeros vals
+    e_tilde(indx) = e_hat(indx);                % Extrac vals from hat to tilde
+end
+
+    
+    
+%% Step 3.2
+% Repeat 2.3 with e_tilde
+
+s_tilde = zeros(length(s), 1);
+
+for i=1:totBlocks
+    y_block = s((i-1)*L+1:i*L);        % Extract the j-th block from y       
+    s_tilde((i-1)*L+1:i*L) = filter(1,a(:,i),e_tilde((i-1)*L+1:i*L));
+end
+
+figure
+subplot(2,1,1)
+plot(t,s)
+legend( 'Original speech signal')
+subplot(2,1,2)
+plot(t,s_hat)
+grid on
+xlabel('Time [s]')
+legend('Re-synthesis sequence')
+
+writeFlag = 0;
+if writeFlag == 1
+    audiowrite('s_tilde.wav', s_tilde, Fs)
+end
+
+
+%%
+for i=1:totBlocks
+    y_block = s((i-1)*L+1:i*L);        % Extract the j-th block from y 
+    y_block = y_block.*hamming(length(y_block));    % Multiply with hamming
+    y = [y y_block zeros(length(y_block),1)] 
+end
+
+
+
+
