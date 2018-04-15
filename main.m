@@ -57,7 +57,7 @@ y_block = s(startSample:startSample + Ts*Fs-1);   % Extract block of Ts seconds
 % LPC on segment. 'A' contains model parameters, 'E' is the variance of the
 % prediction errors 
 [a, E] = lpc(y_block,p);
-% KOLLA VAD SOM SKA SKE MED GAIN, G, tror det är vårt E vi får
+
 
 %% Step 1.3 Calculate the residual sequence e(n)
 t = 0:1/Fs:(length(y_block)-1)/Fs;
@@ -190,14 +190,14 @@ figure
 subplot(3,1,1)
 plot(t,s)
 grid on
-title( 'Original speech signal')
+title('Original speech')
 xlabel('Time [s]')
 
 subplot(3,1,2)
 plot(t,s_hat)
 grid on
 xlabel('Time [s]')
-title('Re-synthesis sequence')
+title('Re-synthesized speech')
 
 subplot(3,1,3)
 plot(t,e_hat)
@@ -216,13 +216,13 @@ title('Residual sequence')
 % Use the residual sequence e_hat formed in 2.3
 clc, close all, 
 e_tilde = zeros(length(e_hat),1);
-K = L/4;
+K = 32;
 
 for i=1:totBlocks
-    sigVals = max(abs(e_hat((i-1)*L+1:L*i)),K);    % Find most significant vals
-    [~,loc]=ismember(abs(e_hat),sigVals);       % Check positions
-    indx = find(loc);                           % Extract non-zeros vals
-    e_tilde(indx) = e_hat(indx);                % Extrac vals from hat to tilde
+    sigVals = maxk(abs(e_hat((i-1)*L+1:L*i)),K);   % Find most significant vals. maxk() finds the k largest elements in e_hat.
+    [~,loc]=ismember(abs(e_hat),sigVals);          % Check positions
+    indx = find(loc);                              % Extract non-zeros vals
+    e_tilde(indx) = e_hat(indx);                   % Extrac vals from e_hat to e_tilde
 end
 
     
@@ -233,32 +233,98 @@ end
 s_tilde = zeros(length(s), 1);
 
 for i=1:totBlocks
-    y_block = s((i-1)*L+1:i*L);        % Extract the j-th block from y       
+    y_block = s((i-1)*L+1:i*L);        % Extract the i-th block from y       
     s_tilde((i-1)*L+1:i*L) = filter(1,a(:,i),e_tilde((i-1)*L+1:i*L));
 end
 
 figure
-subplot(2,1,1)
+subplot(3,1,1)
 plot(t,s)
-legend( 'Original speech signal')
-subplot(2,1,2)
-plot(t,s_hat)
 grid on
 xlabel('Time [s]')
-legend('Re-synthesis sequence')
+title('Original speech')
 
-writeFlag = 0;
+
+subplot(3,1,2)
+plot(t,s_tilde)
+grid on
+xlabel('Time [s]')
+title('Re-synthesized speech')
+
+subplot(3,1,3)
+plot(t,e_tilde)
+grid on
+xlabel('Time [s]')
+title('Modified residual sequence')
+
+
+
+
+writeFlag = 1;
 if writeFlag == 1
-    audiowrite('s_tilde.wav', s_tilde, Fs)
+    audiowrite('stilde.wav', s_tilde, Fs)
 end
 
 
-%%
+% ------------------------------------------------------------------------
+% -------------------- TASK 4 -------------------------------------------
+% ------------------------------------------------------------------------
+
+%% Step 4.1
+clc, clf, clear, close
+
+[s, Fs] = audioread('MySentence.wav');    % Read the audio-file
+
+Ts = 15;                                  % Length of recorded signal [s]
+durBlock = 0.02;                          % Duration of each block [s]
+totBlocks = Ts/durBlock;                  % Total number of blocks
+L = length(s)/totBlocks;                  % Number of samples in each block [samples]
+
+
+
+cep1 = zeros(2*L , totBlocks);
+cep2 = zeros(2*L , totBlocks);
+
 for i=1:totBlocks
-    y_block = s((i-1)*L+1:i*L);        % Extract the j-th block from y 
-    y_block = y_block.*hamming(length(y_block));    % Multiply with hamming
-    y = [y y_block zeros(length(y_block),1)] 
+    x = s((i-1) * L + 1 : i * L);            % Divide original speech signal into blocks of length L
+    x = x .* hamming(length(x));             % Multiply with Hamming-window to reduce Gibbs effect
+    y = [x; zeros(length(x),1)];             % Pad with zeros
+    
+    cep1(:,i) = log10(abs(fft(y)));           % Spectrum in freq.
+    cep2(:,i) = abs(ifft(cep1(:,i)));       % Spectrum in time
 end
+
+
+figure;
+c = .5;
+startBlock = 50;                    % Set start block between 1 and 220
+t = (0:1/Fs:(2*L-1)/Fs)/2;
+
+for j=startBlock:startBlock+20
+    c1 = cep1(:,j) + j*c; 
+    c2 = cep2(:,j) + j*c; 
+    
+    
+    subplot(1,2,1)
+    plot(t,c2)                        % Time domain plot
+    xlabel('Time [s]')
+    grid on
+    hold on
+    
+    subplot(1,2,2)
+    plot(1./t,c1)
+    xlabel('Frequency [Hz]')
+    grid on
+    hold on
+    
+end
+
+
+
+
+
+
+
 
 
 

@@ -1,0 +1,711 @@
+#
+# A fatal error has been detected by the Java Runtime Environment:
+#
+#  SIGSEGV (0xb) at pc=0x0000776394a97c20, pid=8761, tid=0x00007f637ca6d700
+#
+# JRE version: Java(TM) SE Runtime Environment (8.0_121-b13) (build 1.8.0_121-b13)
+# Java VM: Java HotSpot(TM) 64-Bit Server VM (25.121-b13 mixed mode linux-amd64 compressed oops)
+# Problematic frame:
+# C  0x0000776394a97c20
+#
+# Failed to write core dump. Core dumps have been disabled. To enable core dumping, try "ulimit -c unlimited" before starting Java again
+#
+# If you would like to submit a bug report, please visit:
+#   http://bugreport.java.com/bugreport/crash.jsp
+#
+
+---------------  T H R E A D  ---------------
+
+Current thread (0x00007f63900ba800):  JavaThread "C2 CompilerThread0" daemon [_thread_in_native, id=8771, stack(0x00007f637c96d000,0x00007f637ca6e000)]
+
+siginfo: si_signo: 11 (SIGSEGV), si_code: 1 (SEGV_MAPERR), si_addr: 0x0000776394a97c20
+
+Registers:
+RAX=0x00007f639574cff0, RBX=0x0000000000000008, RCX=0x00007f637ca6b120, RDX=0x0000000000000008
+RSP=0x00007f637ca698e8, RBP=0x00007f637ca69950, RSI=0x00000000000000b8, RDI=0x00007f63440b0e78
+R8 =0x0000000000000002, R9 =0x00000000000000c0, R10=0x000000000000000b, R11=0x0000000000000032
+R12=0x00007f63440b1a78, R13=0x0000000000000001, R14=0x0000000000000000, R15=0x00007f637ca6be80
+RIP=0x0000776394a97c20, EFLAGS=0x0000000000010246, CSGSFS=0x0000000000000033, ERR=0x0000000000000014
+  TRAPNO=0x000000000000000e
+
+Top of Stack: (sp=0x00007f637ca698e8)
+0x00007f637ca698e8:   00007f6395154e69 00007f637ca69950
+0x00007f637ca698f8:   00007f63440c22c0 00007f63760efbd8
+0x00007f637ca69908:   00007f63900ba800 00001000760efbd8
+0x00007f637ca69918:   0000400000000c00 00007f63900ba800
+0x00007f637ca69928:   00007f63440c22c0 0000000000000008
+0x00007f637ca69938:   00007f63440b4648 00007f637ca6b120
+0x00007f637ca69948:   0000000000000032 00007f637ca699b0
+0x00007f637ca69958:   00007f639515ad01 0000000000000001
+0x00007f637ca69968:   00007f637ca6be80 00007f63440b1a88
+0x00007f637ca69978:   00007f637ca6c018 00007f637ca699b0
+0x00007f637ca69988:   00007f637ca6be80 00007f637ca6a650
+0x00007f637ca69998:   00007f637ca699c0 00000000deadbeef
+0x00007f637ca699a8:   00007f637ca6aff0 00007f637ca6b1e0
+0x00007f637ca699b8:   00007f6394cc219b 00007f6395782c10
+0x00007f637ca699c8:   0000000000000006 00007f637ca6be80
+0x00007f637ca699d8:   00007f63900bb270 00007f63900bb270
+0x00007f637ca699e8:   0000000000000100 00007f634410f1a0
+0x00007f637ca699f8:   0000000000000000 00007f63900bb270
+0x00007f637ca69a08:   0000000000000100 00007f634410cea0
+0x00007f637ca69a18:   0000000000000000 0000000000000000
+0x00007f637ca69a28:   0000000000000000 0000000000000000
+0x00007f637ca69a38:   0000000000000000 0000000000000000
+0x00007f637ca69a48:   0000000000000000 0000000000000000
+0x00007f637ca69a58:   0000000000000000 0000000000000000
+0x00007f637ca69a68:   0000000000000000 0000000000000000
+0x00007f637ca69a78:   0000000000000000 0000000000000000
+0x00007f637ca69a88:   0000000000000000 0000000000000000
+0x00007f637ca69a98:   0000000000000000 0000000000000000
+0x00007f637ca69aa8:   0000000000000000 0000000000000000
+0x00007f637ca69ab8:   0000000000000000 0000000000000000
+0x00007f637ca69ac8:   0000000000000000 0000000000000000
+0x00007f637ca69ad8:   0000000000000000 0000000000000000 
+
+Instructions: (pc=0x0000776394a97c20)
+0x0000776394a97c00:   
+[error occurred during error reporting (printing registers, top of stack, instructions near pc), id 0xb]
+
+Register to memory mapping:
+
+RAX=0x00007f639574cff0: <offset 0xf2dff0> in /usr/local/MATLAB/R2017b/sys/java/jre/glnxa64/jre/lib/amd64/server/libjvm.so at 0x00007f639481f000
+RBX=0x0000000000000008 is an unknown value
+RCX=0x00007f637ca6b120 is pointing into the stack for thread: 0x00007f63900ba800
+RDX=0x0000000000000008 is an unknown value
+RSP=0x00007f637ca698e8 is pointing into the stack for thread: 0x00007f63900ba800
+RBP=0x00007f637ca69950 is pointing into the stack for thread: 0x00007f63900ba800
+RSI=0x00000000000000b8 is an unknown value
+RDI=0x00007f63440b0e78 is an unknown value
+R8 =0x0000000000000002 is an unknown value
+R9 =0x00000000000000c0 is an unknown value
+R10=0x000000000000000b is an unknown value
+R11=0x0000000000000032 is an unknown value
+R12=0x00007f63440b1a78 is an unknown value
+R13=0x0000000000000001 is an unknown value
+R14=0x0000000000000000 is an unknown value
+R15=0x00007f637ca6be80 is pointing into the stack for thread: 0x00007f63900ba800
+
+
+Stack: [0x00007f637c96d000,0x00007f637ca6e000],  sp=0x00007f637ca698e8,  free space=1010k
+Native frames: (J=compiled Java code, j=interpreted, Vv=VM code, C=native code)
+C  0x0000776394a97c20
+V  [libjvm.so+0x93bd01]  Compile::Output()+0x381
+V  [libjvm.so+0x4a319b]  Compile::Code_Gen()+0x31b
+V  [libjvm.so+0x4a5961]  Compile::Compile(ciEnv*, C2Compiler*, ciMethod*, int, bool, bool, bool)+0x14b1
+V  [libjvm.so+0x3f2615]  C2Compiler::compile_method(ciEnv*, ciMethod*, int)+0x1f5
+V  [libjvm.so+0x4afeaa]  CompileBroker::invoke_compiler_on_method(CompileTask*)+0xc9a
+V  [libjvm.so+0x4b0e56]  CompileBroker::compiler_thread_loop()+0x5d6
+V  [libjvm.so+0xa75543]  JavaThread::thread_main_inner()+0x103
+V  [libjvm.so+0xa7568c]  JavaThread::run()+0x11c
+V  [libjvm.so+0x926268]  java_start(Thread*)+0x108
+C  [libpthread.so.0+0x76ba]  start_thread+0xca
+
+
+Current CompileTask:
+C2:    987  962       4       sun.security.util.DerValue::isPrintableStringChar (184 bytes)
+
+
+---------------  P R O C E S S  ---------------
+
+Java Threads: ( => current thread )
+  0x00007f63240db800 JavaThread "MultiThreadedHttpConnectionManager cleanup" daemon [_thread_blocked, id=8780, stack(0x00007f6375e46000,0x00007f6375f47000)]
+  0x00007f639000b000 JavaThread "DestroyJavaVM" [_thread_blocked, id=8762, stack(0x00007f6396306000,0x00007f6396407000)]
+  0x00007f63903d8800 JavaThread "AWT-EventQueue-0" [_thread_in_Java, id=8779, stack(0x00007f6376164000,0x00007f6376265000)]
+  0x00007f63903d6800 JavaThread "AWT-Shutdown" [_thread_blocked, id=8778, stack(0x00007f6376265000,0x00007f6376366000)]
+  0x00007f63903d4800 JavaThread "AWT-XAWT" daemon [_thread_in_native, id=8777, stack(0x00007f6376366000,0x00007f6376467000)]
+  0x00007f63903b5000 JavaThread "Java2D Disposer" daemon [_thread_blocked, id=8776, stack(0x00007f637689b000,0x00007f637699c000)]
+  0x00007f63900c2800 JavaThread "Service Thread" daemon [_thread_blocked, id=8774, stack(0x00007f637c66a000,0x00007f637c76b000)]
+  0x00007f63900bf800 JavaThread "C1 CompilerThread2" daemon [_thread_in_native, id=8773, stack(0x00007f637c76b000,0x00007f637c86c000)]
+  0x00007f63900bd800 JavaThread "C2 CompilerThread1" daemon [_thread_in_native, id=8772, stack(0x00007f637c86c000,0x00007f637c96d000)]
+=>0x00007f63900ba800 JavaThread "C2 CompilerThread0" daemon [_thread_in_native, id=8771, stack(0x00007f637c96d000,0x00007f637ca6e000)]
+  0x00007f63900b9000 JavaThread "Signal Dispatcher" daemon [_thread_blocked, id=8770, stack(0x00007f637ca6e000,0x00007f637cb6f000)]
+  0x00007f6390085000 JavaThread "Finalizer" daemon [_thread_blocked, id=8769, stack(0x00007f637cfc5000,0x00007f637d0c6000)]
+  0x00007f6390080800 JavaThread "Reference Handler" daemon [_thread_blocked, id=8768, stack(0x00007f637d0c6000,0x00007f637d1c7000)]
+
+Other Threads:
+  0x00007f6390079000 VMThread [stack: 0x00007f637d1c7000,0x00007f637d2c8000] [id=8767]
+  0x00007f63900c5800 WatcherThread [stack: 0x00007f637c569000,0x00007f637c66a000] [id=8775]
+
+VM state:not at safepoint (normal execution)
+
+VM Mutex/Monitor currently owned by a thread: None
+
+Heap:
+ PSYoungGen      total 55808K, used 25999K [0x0000000782000000, 0x0000000785e00000, 0x00000007c0000000)
+  eden space 48128K, 54% used [0x0000000782000000,0x0000000783963d48,0x0000000784f00000)
+  from space 7680K, 0% used [0x0000000785680000,0x0000000785680000,0x0000000785e00000)
+  to   space 7680K, 0% used [0x0000000784f00000,0x0000000784f00000,0x0000000785680000)
+ ParOldGen       total 126976K, used 0K [0x0000000706000000, 0x000000070dc00000, 0x0000000782000000)
+  object space 126976K, 0% used [0x0000000706000000,0x0000000706000000,0x000000070dc00000)
+ Metaspace       used 14176K, capacity 14500K, committed 14592K, reserved 1062912K
+  class space    used 1654K, capacity 1765K, committed 1792K, reserved 1048576K
+
+Card table byte_map: [0x00007f637f9e8000,0x00007f637ffb9000] byte_map_base: 0x00007f637c1b8000
+
+Marking Bits: (ParMarkBitMap*) 0x00007f63957e3c80
+ Begin Bits: [0x00007f635a300000, 0x00007f635d180000)
+ End Bits:   [0x00007f635d180000, 0x00007f6360000000)
+
+Polling page: 0x00007f639642f000
+
+CodeCache: size=245760Kb used=3494Kb max_used=3494Kb free=242265Kb
+ bounds [0x00007f6380379000, 0x00007f63806e9000, 0x00007f638f379000]
+ total_blobs=1446 nmethods=962 adapters=398
+ compilation: enabled
+
+Compilation events (10 events):
+Event: 0.971 Thread 0x00007f63900ba800  953       4       java.lang.Character::isWhitespace (5 bytes)
+Event: 0.972 Thread 0x00007f63900ba800 nmethod 953 0x00007f63806d2dd0 code [0x00007f63806d2f20, 0x00007f63806d2fd8]
+Event: 0.972 Thread 0x00007f63900ba800  961       4       java.lang.CharacterDataLatin1::isWhitespace (23 bytes)
+Event: 0.973 Thread 0x00007f63900ba800 nmethod 961 0x00007f63806b8e90 code [0x00007f63806b8fe0, 0x00007f63806b9078]
+Event: 0.973 Thread 0x00007f63900ba800  954       4       java.lang.AbstractStringBuilder::<init> (12 bytes)
+Event: 0.974 Thread 0x00007f63900ba800 nmethod 954 0x00007f63806d1590 code [0x00007f63806d16e0, 0x00007f63806d1818]
+Event: 0.974 Thread 0x00007f63900ba800  962       4       sun.security.util.DerValue::isPrintableStringChar (184 bytes)
+Event: 0.975 Thread 0x00007f63900bd800  963       4       java.lang.String::toUpperCase (439 bytes)
+Event: 0.979 Thread 0x00007f63900bf800 nmethod 956 0x00007f63806d4910 code [0x00007f63806d50c0, 0x00007f63806da7e8]
+Event: 0.979 Thread 0x00007f63900bf800  960       3       sun.text.normalizer.NormalizerBase::normalize (223 bytes)
+
+GC Heap History (0 events):
+No events
+
+Deoptimization events (10 events):
+Event: 0.479 Thread 0x00007f63903d8800 Uncommon trap: reason=bimorphic action=maybe_recompile pc=0x00007f63805ee9d4 method=java.util.HashMap.putVal(ILjava/lang/Object;Ljava/lang/Object;ZZ)Ljava/lang/Object; @ 203
+Event: 0.479 Thread 0x00007f63903d8800 Uncommon trap: reason=bimorphic action=maybe_recompile pc=0x00007f63805ee9d4 method=java.util.HashMap.putVal(ILjava/lang/Object;Ljava/lang/Object;ZZ)Ljava/lang/Object; @ 203
+Event: 0.480 Thread 0x00007f63903d8800 Uncommon trap: reason=bimorphic action=maybe_recompile pc=0x00007f63805ee9d4 method=java.util.HashMap.putVal(ILjava/lang/Object;Ljava/lang/Object;ZZ)Ljava/lang/Object; @ 203
+Event: 0.483 Thread 0x00007f63903d8800 Uncommon trap: reason=bimorphic action=maybe_recompile pc=0x00007f63805ee9d4 method=java.util.HashMap.putVal(ILjava/lang/Object;Ljava/lang/Object;ZZ)Ljava/lang/Object; @ 203
+Event: 0.568 Thread 0x00007f63903d8800 Uncommon trap: reason=bimorphic action=maybe_recompile pc=0x00007f638060dfe8 method=java.util.regex.Pattern$BmpCharProperty.match(Ljava/util/regex/Matcher;ILjava/lang/CharSequence;)Z @ 31
+Event: 0.568 Thread 0x00007f63903d8800 Uncommon trap: reason=bimorphic action=maybe_recompile pc=0x00007f638060dfe8 method=java.util.regex.Pattern$BmpCharProperty.match(Ljava/util/regex/Matcher;ILjava/lang/CharSequence;)Z @ 31
+Event: 0.568 Thread 0x00007f63903d8800 Uncommon trap: reason=bimorphic action=maybe_recompile pc=0x00007f638060dfe8 method=java.util.regex.Pattern$BmpCharProperty.match(Ljava/util/regex/Matcher;ILjava/lang/CharSequence;)Z @ 31
+Event: 0.568 Thread 0x00007f63903d8800 Uncommon trap: reason=bimorphic action=maybe_recompile pc=0x00007f638060dfe8 method=java.util.regex.Pattern$BmpCharProperty.match(Ljava/util/regex/Matcher;ILjava/lang/CharSequence;)Z @ 31
+Event: 0.637 Thread 0x00007f63903d8800 Uncommon trap: reason=unstable_if action=reinterpret pc=0x00007f63805e62a8 method=java.lang.CharacterDataLatin1.digit(II)I @ 82
+Event: 0.662 Thread 0x00007f63903d8800 Uncommon trap: reason=unstable_if action=reinterpret pc=0x00007f63805ecb1c method=java.lang.CharacterDataLatin1.digit(II)I @ 82
+
+Internal exceptions (10 events):
+Event: 0.272 Thread 0x00007f63903d8800 Exception <a 'java/lang/ArrayIndexOutOfBoundsException'> (0x0000000782832a68) thrown at [/HUDSON3/workspace/8-2-build-linux-amd64/jdk8u121/8372/hotspot/src/share/vm/runtime/sharedRuntime.cpp, line 605]
+Event: 0.273 Thread 0x00007f63903d8800 Exception <a 'java/lang/ArrayIndexOutOfBoundsException'> (0x00000007828341a8) thrown at [/HUDSON3/workspace/8-2-build-linux-amd64/jdk8u121/8372/hotspot/src/share/vm/runtime/sharedRuntime.cpp, line 605]
+Event: 0.276 Thread 0x00007f63903d8800 Exception <a 'java/lang/ArrayIndexOutOfBoundsException'> (0x0000000782849758) thrown at [/HUDSON3/workspace/8-2-build-linux-amd64/jdk8u121/8372/hotspot/src/share/vm/runtime/sharedRuntime.cpp, line 605]
+Event: 0.277 Thread 0x00007f63903d8800 Exception <a 'java/lang/ArrayIndexOutOfBoundsException'> (0x000000078284ac60) thrown at [/HUDSON3/workspace/8-2-build-linux-amd64/jdk8u121/8372/hotspot/src/share/vm/runtime/sharedRuntime.cpp, line 605]
+Event: 0.291 Thread 0x00007f63903d8800 Exception <a 'java/lang/ArrayIndexOutOfBoundsException': 63> (0x00000007828aa338) thrown at [/HUDSON3/workspace/8-2-build-linux-amd64/jdk8u121/8372/hotspot/src/share/vm/interpreter/interpreterRuntime.cpp, line 366]
+Event: 0.332 Thread 0x00007f63903d8800 Exception <a 'java/lang/NoClassDefFoundError': org/apache/log4j/Category> (0x0000000782ac39d8) thrown at [/HUDSON3/workspace/8-2-build-linux-amd64/jdk8u121/8372/hotspot/src/share/vm/classfile/systemDictionary.cpp, line 199]
+Event: 0.355 Thread 0x00007f63903d8800 Exception <a 'java/io/FileNotFoundException'> (0x0000000782c2eb08) thrown at [/HUDSON3/workspace/8-2-build-linux-amd64/jdk8u121/8372/hotspot/src/share/vm/prims/jni.cpp, line 709]
+Event: 0.355 Thread 0x00007f63903d8800 Exception <a 'java/io/FileNotFoundException'> (0x0000000782c386a8) thrown at [/HUDSON3/workspace/8-2-build-linux-amd64/jdk8u121/8372/hotspot/src/share/vm/prims/jni.cpp, line 709]
+Event: 0.355 Thread 0x00007f63903d8800 Exception <a 'java/io/FileNotFoundException'> (0x0000000782c3bf98) thrown at [/HUDSON3/workspace/8-2-build-linux-amd64/jdk8u121/8372/hotspot/src/share/vm/prims/jni.cpp, line 709]
+Event: 0.373 Thread 0x00007f63903d8800 Exception <a 'java/lang/ClassNotFoundException': com/sun/org/glassfish/hk2/osgiresourcelocator/ServiceLoader> (0x0000000782d098c0) thrown at [/HUDSON3/workspace/8-2-build-linux-amd64/jdk8u121/8372/hotspot/src/share/vm/classfile/systemDictionary.cpp, line 
+
+Events (10 events):
+Event: 0.978 loading class sun/security/provider/certpath/CertPathHelper done
+Event: 0.978 loading class java/security/cert/CertPathHelperImpl done
+Event: 0.979 loading class sun/security/provider/certpath/KeyChecker
+Event: 0.979 loading class sun/security/provider/certpath/KeyChecker done
+Event: 0.979 loading class sun/security/provider/certpath/ConstraintsChecker
+Event: 0.979 loading class sun/security/provider/certpath/ConstraintsChecker done
+Event: 0.979 loading class sun/security/provider/certpath/PolicyNodeImpl
+Event: 0.979 loading class java/security/cert/PolicyNode
+Event: 0.979 loading class java/security/cert/PolicyNode done
+Event: 0.979 loading class sun/security/provider/certpath/PolicyNodeImpl done
+
+
+Dynamic libraries:
+00400000-00401000 r-xp 00000000 08:02 1075529                            /usr/local/MATLAB/R2017b/sys/java/jre/glnxa64/jre/bin/java
+00600000-00601000 rw-p 00000000 08:02 1075529                            /usr/local/MATLAB/R2017b/sys/java/jre/glnxa64/jre/bin/java
+00732000-00753000 rw-p 00000000 00:00 0                                  [heap]
+706000000-70dc00000 rw-p 00000000 00:00 0 
+70dc00000-782000000 ---p 00000000 00:00 0 
+782000000-785e00000 rw-p 00000000 00:00 0 
+785e00000-7c0000000 ---p 00000000 00:00 0 
+7c0000000-7c01c0000 rw-p 00000000 00:00 0 
+7c01c0000-800000000 ---p 00000000 00:00 0 
+7f6324000000-7f63241c7000 rw-p 00000000 00:00 0 
+7f63241c7000-7f6328000000 ---p 00000000 00:00 0 
+7f6328000000-7f6328021000 rw-p 00000000 00:00 0 
+7f6328021000-7f632c000000 ---p 00000000 00:00 0 
+7f632c000000-7f632c021000 rw-p 00000000 00:00 0 
+7f632c021000-7f6330000000 ---p 00000000 00:00 0 
+7f6330000000-7f6330021000 rw-p 00000000 00:00 0 
+7f6330021000-7f6334000000 ---p 00000000 00:00 0 
+7f6334000000-7f6334021000 rw-p 00000000 00:00 0 
+7f6334021000-7f6338000000 ---p 00000000 00:00 0 
+7f6338000000-7f6338021000 rw-p 00000000 00:00 0 
+7f6338021000-7f633c000000 ---p 00000000 00:00 0 
+7f633c000000-7f633c35b000 rw-p 00000000 00:00 0 
+7f633c35b000-7f6340000000 ---p 00000000 00:00 0 
+7f6340000000-7f6340021000 rw-p 00000000 00:00 0 
+7f6340021000-7f6344000000 ---p 00000000 00:00 0 
+7f6344000000-7f63443f8000 rw-p 00000000 00:00 0 
+7f63443f8000-7f6348000000 ---p 00000000 00:00 0 
+7f6348000000-7f6348106000 rw-p 00000000 00:00 0 
+7f6348106000-7f634c000000 ---p 00000000 00:00 0 
+7f634c000000-7f634c021000 rw-p 00000000 00:00 0 
+7f634c021000-7f6350000000 ---p 00000000 00:00 0 
+7f6350000000-7f6350021000 rw-p 00000000 00:00 0 
+7f6350021000-7f6354000000 ---p 00000000 00:00 0 
+7f6354000000-7f6354021000 rw-p 00000000 00:00 0 
+7f6354021000-7f6358000000 ---p 00000000 00:00 0 
+7f635a300000-7f6360000000 rw-p 00000000 00:00 0 
+7f6360000000-7f6360021000 rw-p 00000000 00:00 0 
+7f6360021000-7f6364000000 ---p 00000000 00:00 0 
+7f6364000000-7f6364021000 rw-p 00000000 00:00 0 
+7f6364021000-7f6368000000 ---p 00000000 00:00 0 
+7f6368000000-7f6368021000 rw-p 00000000 00:00 0 
+7f6368021000-7f636c000000 ---p 00000000 00:00 0 
+7f6370000000-7f6370021000 rw-p 00000000 00:00 0 
+7f6370021000-7f6374000000 ---p 00000000 00:00 0 
+7f6374a81000-7f6374b01000 rw-p 00000000 00:00 0 
+7f6374b01000-7f6374c81000 ---p 00000000 00:00 0 
+7f6374c81000-7f6374c98000 r-xp 00000000 08:02 4986074                    /lib/x86_64-linux-gnu/libresolv-2.23.so
+7f6374c98000-7f6374e98000 ---p 00017000 08:02 4986074                    /lib/x86_64-linux-gnu/libresolv-2.23.so
+7f6374e98000-7f6374e99000 r--p 00017000 08:02 4986074                    /lib/x86_64-linux-gnu/libresolv-2.23.so
+7f6374e99000-7f6374e9a000 rw-p 00018000 08:02 4986074                    /lib/x86_64-linux-gnu/libresolv-2.23.so
+7f6374e9a000-7f6374e9c000 rw-p 00000000 00:00 0 
+7f6374e9c000-7f6374ea1000 r-xp 00000000 08:02 4986072                    /lib/x86_64-linux-gnu/libnss_dns-2.23.so
+7f6374ea1000-7f63750a1000 ---p 00005000 08:02 4986072                    /lib/x86_64-linux-gnu/libnss_dns-2.23.so
+7f63750a1000-7f63750a2000 r--p 00005000 08:02 4986072                    /lib/x86_64-linux-gnu/libnss_dns-2.23.so
+7f63750a2000-7f63750a3000 rw-p 00006000 08:02 4986072                    /lib/x86_64-linux-gnu/libnss_dns-2.23.so
+7f63750a3000-7f63750a5000 r-xp 00000000 08:02 4985534                    /lib/x86_64-linux-gnu/libnss_mdns4_minimal.so.2
+7f63750a5000-7f63752a4000 ---p 00002000 08:02 4985534                    /lib/x86_64-linux-gnu/libnss_mdns4_minimal.so.2
+7f63752a4000-7f63752a5000 r--p 00001000 08:02 4985534                    /lib/x86_64-linux-gnu/libnss_mdns4_minimal.so.2
+7f63752a5000-7f63752a6000 rw-p 00002000 08:02 4985534                    /lib/x86_64-linux-gnu/libnss_mdns4_minimal.so.2
+7f63752ca000-7f63752d0000 r--s 0003f000 08:02 3417519                    /usr/local/MATLAB/R2017b/sys/java/jre/glnxa64/jre/lib/ext/sunjce_provider.jar
+7f63752d0000-7f63752e1000 r-xp 00000000 08:02 3417541                    /usr/local/MATLAB/R2017b/sys/java/jre/glnxa64/jre/lib/amd64/libnio.so
+7f63752e1000-7f63754e0000 ---p 00011000 08:02 3417541                    /usr/local/MATLAB/R2017b/sys/java/jre/glnxa64/jre/lib/amd64/libnio.so
+7f63754e0000-7f63754e1000 rw-p 00010000 08:02 3417541                    /usr/local/MATLAB/R2017b/sys/java/jre/glnxa64/jre/lib/amd64/libnio.so
+7f63754e1000-7f63757e2000 rw-p 00000000 00:00 0 
+7f63757e2000-7f63757f8000 r-xp 00000000 08:02 3417543                    /usr/local/MATLAB/R2017b/sys/java/jre/glnxa64/jre/lib/amd64/libnet.so
+7f63757f8000-7f63759f8000 ---p 00016000 08:02 3417543                    /usr/local/MATLAB/R2017b/sys/java/jre/glnxa64/jre/lib/amd64/libnet.so
+7f63759f8000-7f63759f9000 rw-p 00016000 08:02 3417543                    /usr/local/MATLAB/R2017b/sys/java/jre/glnxa64/jre/lib/amd64/libnet.so
+7f63759f9000-7f6375a2b000 r-xp 00000000 08:02 3417555                    /usr/local/MATLAB/R2017b/sys/java/jre/glnxa64/jre/lib/amd64/libsunec.so
+7f6375a2b000-7f6375c2a000 ---p 00032000 08:02 3417555                    /usr/local/MATLAB/R2017b/sys/java/jre/glnxa64/jre/lib/amd64/libsunec.so
+7f6375c2a000-7f6375c30000 rw-p 00031000 08:02 3417555                    /usr/local/MATLAB/R2017b/sys/java/jre/glnxa64/jre/lib/amd64/libsunec.so
+7f6375c30000-7f6375e40000 rw-p 00000000 00:00 0 
+7f6375e40000-7f6375e42000 r--s 00009000 08:02 3417512                    /usr/local/MATLAB/R2017b/sys/java/jre/glnxa64/jre/lib/ext/sunec.jar
+7f6375e42000-7f6375e46000 r--s 0003a000 08:02 3417516                    /usr/local/MATLAB/R2017b/sys/java/jre/glnxa64/jre/lib/ext/sunpkcs11.jar
+7f6375e46000-7f6375e49000 ---p 00000000 00:00 0 
+7f6375e49000-7f6375f47000 rw-p 00000000 00:00 0 
+7f6375f47000-7f6375f5a000 r--s 00345000 08:02 1854555                    /usr/local/MATLAB/R2017b/sys/java/jre/glnxa64/jre/lib/resources.jar
+7f6375f5a000-7f637615a000 rw-p 00000000 00:00 0 
+7f637615a000-7f6376164000 r--s 00116000 08:02 3417515                    /usr/local/MATLAB/R2017b/sys/java/jre/glnxa64/jre/lib/ext/localedata.jar
+7f6376164000-7f6376167000 ---p 00000000 00:00 0 
+7f6376167000-7f6376265000 rw-p 00000000 00:00 0 
+7f6376265000-7f6376268000 ---p 00000000 00:00 0 
+7f6376268000-7f6376366000 rw-p 00000000 00:00 0 
+7f6376366000-7f6376369000 ---p 00000000 00:00 0 
+7f6376369000-7f6376467000 rw-p 00000000 00:00 0 
+7f6376467000-7f637646c000 r-xp 00000000 08:02 7086653                    /usr/lib/x86_64-linux-gnu/libXfixes.so.3.1.0
+7f637646c000-7f637666b000 ---p 00005000 08:02 7086653                    /usr/lib/x86_64-linux-gnu/libXfixes.so.3.1.0
+7f637666b000-7f637666c000 r--p 00004000 08:02 7086653                    /usr/lib/x86_64-linux-gnu/libXfixes.so.3.1.0
+7f637666c000-7f637666d000 rw-p 00005000 08:02 7086653                    /usr/lib/x86_64-linux-gnu/libXfixes.so.3.1.0
+7f637666d000-7f6376676000 r-xp 00000000 08:02 7086645                    /usr/lib/x86_64-linux-gnu/libXcursor.so.1.0.2
+7f6376676000-7f6376875000 ---p 00009000 08:02 7086645                    /usr/lib/x86_64-linux-gnu/libXcursor.so.1.0.2
+7f6376875000-7f6376876000 r--p 00008000 08:02 7086645                    /usr/lib/x86_64-linux-gnu/libXcursor.so.1.0.2
+7f6376876000-7f6376877000 rw-p 00009000 08:02 7086645                    /usr/lib/x86_64-linux-gnu/libXcursor.so.1.0.2
+7f6376878000-7f637687b000 r--s 0001a000 08:02 1854553                    /usr/local/MATLAB/R2017b/sys/java/jre/glnxa64/jre/lib/jce.jar
+7f637687b000-7f637687f000 r--s 0009a000 08:02 1854574                    /usr/local/MATLAB/R2017b/sys/java/jre/glnxa64/jre/lib/jsse.jar
+7f637687f000-7f637689b000 r--s 00393000 08:02 3417514                    /usr/local/MATLAB/R2017b/sys/java/jre/glnxa64/jre/lib/ext/cldrdata.jar
+7f637689b000-7f637689e000 ---p 00000000 00:00 0 
+7f637689e000-7f637699c000 rw-p 00000000 00:00 0 
+7f637699c000-7f63769b2000 r-xp 00000000 08:02 7229008                    /usr/local/MATLAB/R2017b/sys/os/glnxa64/libgcc_s.so.1
+7f63769b2000-7f6376bb1000 ---p 00016000 08:02 7229008                    /usr/local/MATLAB/R2017b/sys/os/glnxa64/libgcc_s.so.1
+7f6376bb1000-7f6376bb2000 rw-p 00015000 08:02 7229008                    /usr/local/MATLAB/R2017b/sys/os/glnxa64/libgcc_s.so.1
+7f6376bb2000-7f6376c17000 r-xp 00000000 08:02 3417538                    /usr/local/MATLAB/R2017b/sys/java/jre/glnxa64/jre/lib/amd64/libfontmanager.so
+7f6376c17000-7f6376e16000 ---p 00065000 08:02 3417538                    /usr/local/MATLAB/R2017b/sys/java/jre/glnxa64/jre/lib/amd64/libfontmanager.so
+7f6376e16000-7f6376e1b000 rw-p 00064000 08:02 3417538                    /usr/local/MATLAB/R2017b/sys/java/jre/glnxa64/jre/lib/amd64/libfontmanager.so
+7f6376e1b000-7f6376e2b000 rw-p 00000000 00:00 0 
+7f6376e2b000-7f6376e2f000 r--s 0001f000 08:02 7115980                    /usr/local/MATLAB/R2017b/java/jarext/axis2/XmlSchema.jar
+7f6376e2f000-7f6376e35000 r--s 0007a000 08:02 7115979                    /usr/local/MATLAB/R2017b/java/jarext/axis2/wstx-asl.jar
+7f6376e35000-7f6376e3a000 r--s 00020000 08:02 7115978                    /usr/local/MATLAB/R2017b/java/jarext/axis2/wsdl4j.jar
+7f6376e3a000-7f6376e3c000 r--s 00007000 08:02 7115977                    /usr/local/MATLAB/R2017b/java/jarext/axis2/neethi.jar
+7f6376e3c000-7f6376e42000 r--s 00059000 08:02 7115976                    /usr/local/MATLAB/R2017b/java/jarext/axis2/mail.jar
+7f6376e42000-7f6376e47000 r--s 00026000 08:02 7115975                    /usr/local/MATLAB/R2017b/java/jarext/axis2/httpcore.jar
+7f6376e47000-7f6376e4d000 r--s 00045000 08:02 7115973                    /usr/local/MATLAB/R2017b/java/jarext/axis2/commons-httpclient.jar
+7f6376e4d000-7f6376e50000 r--s 00023000 08:02 7115971                    /usr/local/MATLAB/R2017b/java/jarext/axis2/axis2-transport-http.jar
+7f6376e50000-7f6376e5d000 r--s 000e8000 08:02 7115970                    /usr/local/MATLAB/R2017b/java/jarext/axis2/axis2-kernel.jar
+7f6376e5d000-7f6376e68000 r--s 000b4000 08:02 7115969                    /usr/local/MATLAB/R2017b/java/jarext/axis2/axis2-adb.jar
+7f6376e68000-7f6376e6d000 r-xp 00000000 08:02 7086649                    /usr/lib/x86_64-linux-gnu/libXdmcp.so.6.0.0
+7f6376e6d000-7f637706c000 ---p 00005000 08:02 7086649                    /usr/lib/x86_64-linux-gnu/libXdmcp.so.6.0.0
+7f637706c000-7f637706d000 r--p 00004000 08:02 7086649                    /usr/lib/x86_64-linux-gnu/libXdmcp.so.6.0.0
+7f637706d000-7f637706e000 rw-p 00005000 08:02 7086649                    /usr/lib/x86_64-linux-gnu/libXdmcp.so.6.0.0
+7f637706e000-7f6377070000 r-xp 00000000 08:02 7086638                    /usr/lib/x86_64-linux-gnu/libXau.so.6.0.0
+7f6377070000-7f6377270000 ---p 00002000 08:02 7086638                    /usr/lib/x86_64-linux-gnu/libXau.so.6.0.0
+7f6377270000-7f6377271000 r--p 00002000 08:02 7086638                    /usr/lib/x86_64-linux-gnu/libXau.so.6.0.0
+7f6377271000-7f6377272000 rw-p 00003000 08:02 7086638                    /usr/lib/x86_64-linux-gnu/libXau.so.6.0.0
+7f6377272000-7f6377293000 r-xp 00000000 08:02 7088058                    /usr/lib/x86_64-linux-gnu/libxcb.so.1.1.0
+7f6377293000-7f6377492000 ---p 00021000 08:02 7088058                    /usr/lib/x86_64-linux-gnu/libxcb.so.1.1.0
+7f6377492000-7f6377493000 r--p 00020000 08:02 7088058                    /usr/lib/x86_64-linux-gnu/libxcb.so.1.1.0
+7f6377493000-7f6377494000 rw-p 00021000 08:02 7088058                    /usr/lib/x86_64-linux-gnu/libxcb.so.1.1.0
+7f6377494000-7f63774a3000 r-xp 00000000 08:02 7086659                    /usr/lib/x86_64-linux-gnu/libXi.so.6.1.0
+7f63774a3000-7f63776a2000 ---p 0000f000 08:02 7086659                    /usr/lib/x86_64-linux-gnu/libXi.so.6.1.0
+7f63776a2000-7f63776a3000 r--p 0000e000 08:02 7086659                    /usr/lib/x86_64-linux-gnu/libXi.so.6.1.0
+7f63776a3000-7f63776a4000 rw-p 0000f000 08:02 7086659                    /usr/lib/x86_64-linux-gnu/libXi.so.6.1.0
+7f63776a4000-7f63776a9000 r-xp 00000000 08:02 7086677                    /usr/lib/x86_64-linux-gnu/libXtst.so.6.1.0
+7f63776a9000-7f63778a8000 ---p 00005000 08:02 7086677                    /usr/lib/x86_64-linux-gnu/libXtst.so.6.1.0
+7f63778a8000-7f63778a9000 r--p 00004000 08:02 7086677                    /usr/lib/x86_64-linux-gnu/libXtst.so.6.1.0
+7f63778a9000-7f63778aa000 rw-p 00005000 08:02 7086677                    /usr/lib/x86_64-linux-gnu/libXtst.so.6.1.0
+7f63778aa000-7f63778b3000 r-xp 00000000 08:02 7086671                    /usr/lib/x86_64-linux-gnu/libXrender.so.1.3.0
+7f63778b3000-7f6377ab2000 ---p 00009000 08:02 7086671                    /usr/lib/x86_64-linux-gnu/libXrender.so.1.3.0
+7f6377ab2000-7f6377ab3000 r--p 00008000 08:02 7086671                    /usr/lib/x86_64-linux-gnu/libXrender.so.1.3.0
+7f6377ab3000-7f6377ab4000 rw-p 00009000 08:02 7086671                    /usr/lib/x86_64-linux-gnu/libXrender.so.1.3.0
+7f6377ab4000-7f6377be9000 r-xp 00000000 08:02 7086634                    /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0
+7f6377be9000-7f6377de9000 ---p 00135000 08:02 7086634                    /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0
+7f6377de9000-7f6377dea000 r--p 00135000 08:02 7086634                    /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0
+7f6377dea000-7f6377dee000 rw-p 00136000 08:02 7086634                    /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0
+7f6377dee000-7f6377dff000 r-xp 00000000 08:02 7086651                    /usr/lib/x86_64-linux-gnu/libXext.so.6.4.0
+7f6377dff000-7f6377ffe000 ---p 00011000 08:02 7086651                    /usr/lib/x86_64-linux-gnu/libXext.so.6.4.0
+7f6377ffe000-7f6377fff000 r--p 00010000 08:02 7086651                    /usr/lib/x86_64-linux-gnu/libXext.so.6.4.0
+7f6377fff000-7f6378000000 rw-p 00011000 08:02 7086651                    /usr/lib/x86_64-linux-gnu/libXext.so.6.4.0
+7f6378000000-7f6378021000 rw-p 00000000 00:00 0 
+7f6378021000-7f637c000000 ---p 00000000 00:00 0 
+7f637c000000-7f637c002000 r--s 00006000 08:02 7115974                    /usr/local/MATLAB/R2017b/java/jarext/axis2/geronimo-stax-api.jar
+7f637c002000-7f637c005000 r--s 0001b000 08:02 7115968                    /usr/local/MATLAB/R2017b/java/jarext/axis2/axiom-impl.jar
+7f637c005000-7f637c00e000 r--s 0005d000 08:02 7115967                    /usr/local/MATLAB/R2017b/java/jarext/axis2/axiom-api.jar
+7f637c00e000-7f637c010000 r--s 0000e000 08:02 7115966                    /usr/local/MATLAB/R2017b/java/jarext/axis2/activation.jar
+7f637c010000-7f637c018000 r--s 00053000 08:02 7118276                    /usr/local/MATLAB/R2017b/java/jarext/jgoodies-looks.jar
+7f637c018000-7f637c01e000 r--s 00054000 08:02 7118258                    /usr/local/MATLAB/R2017b/java/jarext/felix.jar
+7f637c01e000-7f637c020000 r--s 0000d000 08:02 7115941                    /usr/local/MATLAB/R2017b/java/jarext/commons-logging.jar
+7f637c020000-7f637c024000 r--s 00038000 08:02 7118263                    /usr/local/MATLAB/R2017b/java/jarext/commons-lang.jar
+7f637c024000-7f637c028000 r--s 0002a000 08:02 7115908                    /usr/local/MATLAB/R2017b/java/jarext/commons-io.jar
+7f637c028000-7f637c02a000 r--s 0000a000 08:02 7115960                    /usr/local/MATLAB/R2017b/java/jarext/commons-codec.jar
+7f637c02a000-7f637c037000 r--s 000a7000 08:02 7116010                    /usr/local/MATLAB/R2017b/java/jarext/webservices/urlmanager/urlmanager.jar
+7f637c037000-7f637c03e000 r--s 0003a000 08:02 7118286                    /usr/local/MATLAB/R2017b/java/jar/util.jar
+7f637c03e000-7f637c092000 r-xp 00000000 08:02 3417588                    /usr/local/MATLAB/R2017b/sys/java/jre/glnxa64/jre/lib/amd64/libawt_xawt.so
+7f637c092000-7f637c292000 ---p 00054000 08:02 3417588                    /usr/local/MATLAB/R2017b/sys/java/jre/glnxa64/jre/lib/amd64/libawt_xawt.so
+7f637c292000-7f637c296000 rw-p 00054000 08:02 3417588                    /usr/local/MATLAB/R2017b/sys/java/jre/glnxa64/jre/lib/amd64/libawt_xawt.so
+7f637c296000-7f637c297000 rw-p 00000000 00:00 0 
+7f637c297000-7f637c339000 r-xp 00000000 08:02 3417571                    /usr/local/MATLAB/R2017b/sys/java/jre/glnxa64/jre/lib/amd64/libawt.so
+7f637c339000-7f637c539000 ---p 000a2000 08:02 3417571                    /usr/local/MATLAB/R2017b/sys/java/jre/glnxa64/jre/lib/amd64/libawt.so
+7f637c539000-7f637c545000 rw-p 000a2000 08:02 3417571                    /usr/local/MATLAB/R2017b/sys/java/jre/glnxa64/jre/lib/amd64/libawt.so
+7f637c545000-7f637c569000 rw-p 00000000 00:00 0 
+7f637c569000-7f637c56a000 ---p 00000000 00:00 0 
+7f637c56a000-7f637c66a000 rw-p 00000000 00:00 0 
+7f637c66a000-7f637c66d000 ---p 00000000 00:00 0 
+7f637c66d000-7f637c76b000 rw-p 00000000 00:00 0 
+7f637c76b000-7f637c76e000 ---p 00000000 00:00 0 
+7f637c76e000-7f637c86c000 rw-p 00000000 00:00 0 
+7f637c86c000-7f637c86f000 ---p 00000000 00:00 0 
+7f637c86f000-7f637c96d000 rw-p 00000000 00:00 0 
+7f637c96d000-7f637c970000 ---p 00000000 00:00 0 
+7f637c970000-7f637ca6e000 rw-p 00000000 00:00 0 
+7f637ca6e000-7f637ca71000 ---p 00000000 00:00 0 
+7f637ca71000-7f637cb6f000 rw-p 00000000 00:00 0 
+7f637cb6f000-7f637cfc5000 r--p 00000000 08:02 7085285                    /usr/lib/locale/locale-archive
+7f637cfc5000-7f637cfc8000 ---p 00000000 00:00 0 
+7f637cfc8000-7f637d0c6000 rw-p 00000000 00:00 0 
+7f637d0c6000-7f637d0c9000 ---p 00000000 00:00 0 
+7f637d0c9000-7f637d1c7000 rw-p 00000000 00:00 0 
+7f637d1c7000-7f637d1c8000 ---p 00000000 00:00 0 
+7f637d1c8000-7f637e25b000 rw-p 00000000 00:00 0 
+7f637e25b000-7f637e434000 r--s 03d3e000 08:02 1854582                    /usr/local/MATLAB/R2017b/sys/java/jre/glnxa64/jre/lib/rt.jar
+7f637e434000-7f637f204000 rw-p 00000000 00:00 0 
+7f637f204000-7f637f205000 ---p 00000000 00:00 0 
+7f637f205000-7f637f305000 rw-p 00000000 00:00 0 
+7f637f305000-7f637f306000 ---p 00000000 00:00 0 
+7f637f306000-7f637f406000 rw-p 00000000 00:00 0 
+7f637f406000-7f637f407000 ---p 00000000 00:00 0 
+7f637f407000-7f637f507000 rw-p 00000000 00:00 0 
+7f637f507000-7f637f508000 ---p 00000000 00:00 0 
+7f637f508000-7f637f646000 rw-p 00000000 00:00 0 
+7f637f646000-7f637f9e8000 ---p 00000000 00:00 0 
+7f637f9e8000-7f637fa26000 rw-p 00000000 00:00 0 
+7f637fa26000-7f637fdc8000 ---p 00000000 00:00 0 
+7f637fdc8000-7f637fde7000 rw-p 00000000 00:00 0 
+7f637fde7000-7f637ffb8000 ---p 00000000 00:00 0 
+7f637ffb8000-7f637ffc7000 rw-p 00000000 00:00 0 
+7f637ffc7000-7f6380379000 ---p 00000000 00:00 0 
+7f6380379000-7f63806e9000 rwxp 00000000 00:00 0 
+7f63806e9000-7f638f379000 ---p 00000000 00:00 0 
+7f638f379000-7f638f393000 r-xp 00000000 08:02 3417576                    /usr/local/MATLAB/R2017b/sys/java/jre/glnxa64/jre/lib/amd64/libzip.so
+7f638f393000-7f638f593000 ---p 0001a000 08:02 3417576                    /usr/local/MATLAB/R2017b/sys/java/jre/glnxa64/jre/lib/amd64/libzip.so
+7f638f593000-7f638f594000 rw-p 0001a000 08:02 3417576                    /usr/local/MATLAB/R2017b/sys/java/jre/glnxa64/jre/lib/amd64/libzip.so
+7f638f594000-7f638f59f000 r-xp 00000000 08:02 4986073                    /lib/x86_64-linux-gnu/libnss_files-2.23.so
+7f638f59f000-7f638f79e000 ---p 0000b000 08:02 4986073                    /lib/x86_64-linux-gnu/libnss_files-2.23.so
+7f638f79e000-7f638f79f000 r--p 0000a000 08:02 4986073                    /lib/x86_64-linux-gnu/libnss_files-2.23.so
+7f638f79f000-7f638f7a0000 rw-p 0000b000 08:02 4986073                    /lib/x86_64-linux-gnu/libnss_files-2.23.so
+7f638f7a0000-7f638f7a6000 rw-p 00000000 00:00 0 
+7f638f7a6000-7f638f7b1000 r-xp 00000000 08:02 4986030                    /lib/x86_64-linux-gnu/libnss_nis-2.23.so
+7f638f7b1000-7f638f9b0000 ---p 0000b000 08:02 4986030                    /lib/x86_64-linux-gnu/libnss_nis-2.23.so
+7f638f9b0000-7f638f9b1000 r--p 0000a000 08:02 4986030                    /lib/x86_64-linux-gnu/libnss_nis-2.23.so
+7f638f9b1000-7f638f9b2000 rw-p 0000b000 08:02 4986030                    /lib/x86_64-linux-gnu/libnss_nis-2.23.so
+7f638f9b2000-7f638f9c8000 r-xp 00000000 08:02 4986041                    /lib/x86_64-linux-gnu/libnsl-2.23.so
+7f638f9c8000-7f638fbc7000 ---p 00016000 08:02 4986041                    /lib/x86_64-linux-gnu/libnsl-2.23.so
+7f638fbc7000-7f638fbc8000 r--p 00015000 08:02 4986041                    /lib/x86_64-linux-gnu/libnsl-2.23.so
+7f638fbc8000-7f638fbc9000 rw-p 00016000 08:02 4986041                    /lib/x86_64-linux-gnu/libnsl-2.23.so
+7f638fbc9000-7f638fbcb000 rw-p 00000000 00:00 0 
+7f638fbcb000-7f638fbd3000 r-xp 00000000 08:02 4986042                    /lib/x86_64-linux-gnu/libnss_compat-2.23.so
+7f638fbd3000-7f638fdd2000 ---p 00008000 08:02 4986042                    /lib/x86_64-linux-gnu/libnss_compat-2.23.so
+7f638fdd2000-7f638fdd3000 r--p 00007000 08:02 4986042                    /lib/x86_64-linux-gnu/libnss_compat-2.23.so
+7f638fdd3000-7f638fdd4000 rw-p 00008000 08:02 4986042                    /lib/x86_64-linux-gnu/libnss_compat-2.23.so
+7f638fdd4000-7f638fdff000 r-xp 00000000 08:02 3417584                    /usr/local/MATLAB/R2017b/sys/java/jre/glnxa64/jre/lib/amd64/libjava.so
+7f638fdff000-7f638fffe000 ---p 0002b000 08:02 3417584                    /usr/local/MATLAB/R2017b/sys/java/jre/glnxa64/jre/lib/amd64/libjava.so
+7f638fffe000-7f6390000000 rw-p 0002a000 08:02 3417584                    /usr/local/MATLAB/R2017b/sys/java/jre/glnxa64/jre/lib/amd64/libjava.so
+7f6390000000-7f63904d8000 rw-p 00000000 00:00 0 
+7f63904d8000-7f6394000000 ---p 00000000 00:00 0 
+7f6394000000-7f6394001000 r--s 00004000 08:02 7115972                    /usr/local/MATLAB/R2017b/java/jarext/axis2/axis2-transport-local.jar
+7f6394001000-7f6394002000 r--s 00008000 08:02 7116007                    /usr/local/MATLAB/R2017b/java/jarext/commons-cli.jar
+7f6394002000-7f6394005000 r--s 00007000 08:02 7115999                    /usr/local/MATLAB/R2017b/java/jarext/webservices/ws_client_core/mw-service-client-core.jar
+7f6394005000-7f6394006000 r--s 00002000 08:02 7116005                    /usr/local/MATLAB/R2017b/java/jarext/webservices/udc_client/udc_client.jar
+7f6394006000-7f639401a000 r--s 000bd000 08:02 7118288                    /usr/local/MATLAB/R2017b/java/jar/mwswing.jar
+7f639401a000-7f6394100000 rw-p 00000000 00:00 0 
+7f6394100000-7f639410d000 r-xp 00000000 08:02 3417587                    /usr/local/MATLAB/R2017b/sys/java/jre/glnxa64/jre/lib/amd64/libverify.so
+7f639410d000-7f639430c000 ---p 0000d000 08:02 3417587                    /usr/local/MATLAB/R2017b/sys/java/jre/glnxa64/jre/lib/amd64/libverify.so
+7f639430c000-7f639430e000 rw-p 0000c000 08:02 3417587                    /usr/local/MATLAB/R2017b/sys/java/jre/glnxa64/jre/lib/amd64/libverify.so
+7f639430e000-7f6394315000 r-xp 00000000 08:02 4986029                    /lib/x86_64-linux-gnu/librt-2.23.so
+7f6394315000-7f6394514000 ---p 00007000 08:02 4986029                    /lib/x86_64-linux-gnu/librt-2.23.so
+7f6394514000-7f6394515000 r--p 00006000 08:02 4986029                    /lib/x86_64-linux-gnu/librt-2.23.so
+7f6394515000-7f6394516000 rw-p 00007000 08:02 4986029                    /lib/x86_64-linux-gnu/librt-2.23.so
+7f6394516000-7f639461e000 r-xp 00000000 08:02 4986039                    /lib/x86_64-linux-gnu/libm-2.23.so
+7f639461e000-7f639481d000 ---p 00108000 08:02 4986039                    /lib/x86_64-linux-gnu/libm-2.23.so
+7f639481d000-7f639481e000 r--p 00107000 08:02 4986039                    /lib/x86_64-linux-gnu/libm-2.23.so
+7f639481e000-7f639481f000 rw-p 00108000 08:02 4986039                    /lib/x86_64-linux-gnu/libm-2.23.so
+7f639481f000-7f63954ed000 r-xp 00000000 08:02 3417598                    /usr/local/MATLAB/R2017b/sys/java/jre/glnxa64/jre/lib/amd64/server/libjvm.so
+7f63954ed000-7f63956ed000 ---p 00cce000 08:02 3417598                    /usr/local/MATLAB/R2017b/sys/java/jre/glnxa64/jre/lib/amd64/server/libjvm.so
+7f63956ed000-7f63957c6000 rw-p 00cce000 08:02 3417598                    /usr/local/MATLAB/R2017b/sys/java/jre/glnxa64/jre/lib/amd64/server/libjvm.so
+7f63957c6000-7f6395811000 rw-p 00000000 00:00 0 
+7f6395811000-7f63959d0000 r-xp 00000000 08:02 4986034                    /lib/x86_64-linux-gnu/libc-2.23.so
+7f63959d0000-7f6395bd0000 ---p 001bf000 08:02 4986034                    /lib/x86_64-linux-gnu/libc-2.23.so
+7f6395bd0000-7f6395bd4000 r--p 001bf000 08:02 4986034                    /lib/x86_64-linux-gnu/libc-2.23.so
+7f6395bd4000-7f6395bd6000 rw-p 001c3000 08:02 4986034                    /lib/x86_64-linux-gnu/libc-2.23.so
+7f6395bd6000-7f6395bda000 rw-p 00000000 00:00 0 
+7f6395bda000-7f6395bdd000 r-xp 00000000 08:02 4986033                    /lib/x86_64-linux-gnu/libdl-2.23.so
+7f6395bdd000-7f6395ddc000 ---p 00003000 08:02 4986033                    /lib/x86_64-linux-gnu/libdl-2.23.so
+7f6395ddc000-7f6395ddd000 r--p 00002000 08:02 4986033                    /lib/x86_64-linux-gnu/libdl-2.23.so
+7f6395ddd000-7f6395dde000 rw-p 00003000 08:02 4986033                    /lib/x86_64-linux-gnu/libdl-2.23.so
+7f6395dde000-7f6395df3000 r-xp 00000000 08:02 3417602                    /usr/local/MATLAB/R2017b/sys/java/jre/glnxa64/jre/lib/amd64/jli/libjli.so
+7f6395df3000-7f6395ff3000 ---p 00015000 08:02 3417602                    /usr/local/MATLAB/R2017b/sys/java/jre/glnxa64/jre/lib/amd64/jli/libjli.so
+7f6395ff3000-7f6395ff4000 rw-p 00015000 08:02 3417602                    /usr/local/MATLAB/R2017b/sys/java/jre/glnxa64/jre/lib/amd64/jli/libjli.so
+7f6395ff4000-7f639600c000 r-xp 00000000 08:02 4986040                    /lib/x86_64-linux-gnu/libpthread-2.23.so
+7f639600c000-7f639620b000 ---p 00018000 08:02 4986040                    /lib/x86_64-linux-gnu/libpthread-2.23.so
+7f639620b000-7f639620c000 r--p 00017000 08:02 4986040                    /lib/x86_64-linux-gnu/libpthread-2.23.so
+7f639620c000-7f639620d000 rw-p 00018000 08:02 4986040                    /lib/x86_64-linux-gnu/libpthread-2.23.so
+7f639620d000-7f6396211000 rw-p 00000000 00:00 0 
+7f6396211000-7f6396237000 r-xp 00000000 08:02 4986023                    /lib/x86_64-linux-gnu/ld-2.23.so
+7f6396237000-7f6396239000 r--s 00003000 08:02 7116023                    /usr/local/MATLAB/R2017b/java/jar/webproxy.jar
+7f6396239000-7f639623c000 r--s 0000f000 08:02 7118329                    /usr/local/MATLAB/R2017b/java/jar/mvm.jar
+7f639623c000-7f6396243000 r--s 0003d000 08:02 7118324                    /usr/local/MATLAB/R2017b/java/jar/services.jar
+7f6396243000-7f6396248000 r--s 00036000 08:02 7116021                    /usr/local/MATLAB/R2017b/java/jar/mlwebservices.jar
+7f6396248000-7f6396306000 rw-p 00000000 00:00 0 
+7f6396306000-7f6396309000 ---p 00000000 00:00 0 
+7f6396309000-7f639640c000 rw-p 00000000 00:00 0 
+7f639640c000-7f639640d000 r--s 00003000 08:02 7116022                    /usr/local/MATLAB/R2017b/java/jar/net.jar
+7f639640d000-7f639640f000 r--s 00009000 08:02 7118328                    /usr/local/MATLAB/R2017b/java/jar/fatalexit.jar
+7f639640f000-7f6396424000 r--s 0012d000 08:02 7118287                    /usr/local/MATLAB/R2017b/java/jar/common.jar
+7f6396424000-7f6396426000 r--s 00003000 08:02 7118284                    /usr/local/MATLAB/R2017b/java/jar/cfbutils.jar
+7f6396426000-7f639642e000 rw-s 00000000 08:02 4849695                    /tmp/hsperfdata_rickard/8761
+7f639642e000-7f639642f000 rw-p 00000000 00:00 0 
+7f639642f000-7f6396430000 r--p 00000000 00:00 0 
+7f6396430000-7f6396432000 rw-p 00000000 00:00 0 
+7f6396432000-7f6396434000 r--p 00000000 00:00 0                          [vvar]
+7f6396434000-7f6396436000 r-xp 00000000 00:00 0                          [vdso]
+7f6396436000-7f6396437000 r--p 00025000 08:02 4986023                    /lib/x86_64-linux-gnu/ld-2.23.so
+7f6396437000-7f6396438000 rw-p 00026000 08:02 4986023                    /lib/x86_64-linux-gnu/ld-2.23.so
+7f6396438000-7f6396439000 rw-p 00000000 00:00 0 
+7ffdc7db0000-7ffdc7dd2000 rw-p 00000000 00:00 0                          [stack]
+ffffffffff600000-ffffffffff601000 r-xp 00000000 00:00 0                  [vsyscall]
+
+VM Arguments:
+java_command: com.mathworks.fatalexit.FatalExitFrame /home/rickard/matlab_crash_dump.2226-1 -optIn -releaseFamily R2017b -version 9.3.0.713579 (R2017b) -desktopPlatform glnxa64 -desktopOS Linux 4.4.0-21-generic #37-Ubuntu SMP Mon Apr 18 18:33:37 UTC 2016 x86_64 -installationId a145541a-c629-4eb1-8df8-c05839103031 -sessionKey 3938e0a8-72cf-424c-8ce7-e8a332a1a498 -machineHash 281957715e1dcab5e7a06e8a2bebda11
+java_class_path (initial): /usr/local/MATLAB/R2017b/java/jar/cfbutils.jar:/usr/local/MATLAB/R2017b/java/jar/common.jar:/usr/local/MATLAB/R2017b/java/jar/fatalexit.jar:/usr/local/MATLAB/R2017b/java/jar/mlwebservices.jar:/usr/local/MATLAB/R2017b/java/jar/mwswing.jar:/usr/local/MATLAB/R2017b/java/jar/net.jar:/usr/local/MATLAB/R2017b/java/jar/services.jar:/usr/local/MATLAB/R2017b/java/jar/util.jar:/usr/local/MATLAB/R2017b/java/jar/mvm.jar:/usr/local/MATLAB/R2017b/java/jar/webproxy.jar:/usr/local/MATLAB/R2017b/java/jar/../jarext/webservices/udc_client/udc_client.jar:/usr/local/MATLAB/R2017b/java/jar/../jarext/webservices/urlmanager/urlmanager.jar:/usr/local/MATLAB/R2017b/java/jar/../jarext/webservices/ws_client_core/mw-service-client-core.jar:/usr/local/MATLAB/R2017b/java/jar/../jarext/commons-cli.jar:/usr/local/MATLAB/R2017b/java/jar/../jarext/commons-codec.jar:/usr/local/MATLAB/R2017b/java/jar/../jarext/commons-io.jar:/usr/local/MATLAB/R2017b/java/jar/../jarext/commons-lang.jar:/usr/local/MATLAB/R2017b/java/jar/../jarext/commons-logging.jar:/usr/local/MATLAB/R2017b/java/jar/../jarext/felix.jar:/usr/local/MATLAB/R2017b/java/jar/../jarext/jgoodies-looks.jar:/usr/local/MATLAB/R2017b/java/jar/../jarext/axis2/activation.jar:/usr/local/MATLAB/R2017b/java/jar/../jarext/axis2/axiom-api.jar:/usr/local/MATLAB/R2017b/java/jar/../jarext/axis2/axiom-impl.jar:/usr/local/MATLAB/R2017b/java/jar/../jarext/axis2/axis2-adb.jar:/usr/local/MATLAB/R2017b/java/jar/../jarext/axis2/axis2-kernel.jar:/usr/local/MATLAB/R2017b/java/jar/../jarext/axis2/axis2-transport-http.jar:/usr/local/MATLAB/R2017b/java/jar/../jarext/axis2/axis2-transport-local.jar:/usr/local/MATLAB/R2017b/java/jar/../jarext/axis2/commons-httpclient.jar:/usr/local/MATLAB/R2017b/java/jar/../jarext/axis2/geronimo-stax-api.jar:/usr/local/MATLAB/R2017b/java/jar/../jarext/axis2/httpcore.jar:/usr/local/MATLAB/R2017b/java/jar/../jarext/axis2/mail.jar:/usr/local/MATLAB/R2017b/java/jar/../jarext/axis2/neethi.jar:/usr/local/MATLAB/R2017
+Launcher Type: SUN_STANDARD
+
+Environment Variables:
+PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games
+USERNAME=rickard
+LD_LIBRARY_PATH=/usr/local/MATLAB/R2017b/sys/java/jre/glnxa64/jre/lib/amd64/server:/usr/local/MATLAB/R2017b/sys/java/jre/glnxa64/jre/lib/amd64:/usr/local/MATLAB/R2017b/sys/java/jre/glnxa64/jre/../lib/amd64:/usr/local/MATLAB/R2017b/sys/os/glnxa64:/usr/local/MATLAB/R2017b/bin/glnxa64:/usr/local/MATLAB/R2017b/extern/lib/glnxa64:/usr/local/MATLAB/R2017b/sys/java/jre/glnxa64/jre/lib/amd64/native_threads:/usr/local/MATLAB/R2017b/sys/java/jre/glnxa64/jre/lib/amd64/server
+SHELL=/bin/bash
+DISPLAY=:0
+ARCH=glnxa64
+
+Signal Handlers:
+SIGSEGV: [libjvm.so+0xac78c0], sa_mask[0]=11111111011111111101111111111110, sa_flags=SA_RESTART|SA_SIGINFO
+SIGBUS: [libjvm.so+0xac78c0], sa_mask[0]=11111111011111111101111111111110, sa_flags=SA_RESTART|SA_SIGINFO
+SIGFPE: [libjvm.so+0x920ac0], sa_mask[0]=11111111011111111101111111111110, sa_flags=SA_RESTART|SA_SIGINFO
+SIGPIPE: [libjvm.so+0x920ac0], sa_mask[0]=11111111011111111101111111111110, sa_flags=SA_RESTART|SA_SIGINFO
+SIGXFSZ: [libjvm.so+0x920ac0], sa_mask[0]=11111111011111111101111111111110, sa_flags=SA_RESTART|SA_SIGINFO
+SIGILL: [libjvm.so+0x920ac0], sa_mask[0]=11111111011111111101111111111110, sa_flags=SA_RESTART|SA_SIGINFO
+SIGUSR1: SIG_DFL, sa_mask[0]=00000000000000000000000000000000, sa_flags=none
+SIGUSR2: [libjvm.so+0x922300], sa_mask[0]=01000000001010000001000000010000, sa_flags=SA_RESTART|SA_SIGINFO
+SIGHUP: [libjvm.so+0x923700], sa_mask[0]=11111111011111111101111111111110, sa_flags=SA_RESTART|SA_SIGINFO
+SIGINT: [libjvm.so+0x923700], sa_mask[0]=11111111011111111101111111111110, sa_flags=SA_RESTART|SA_SIGINFO
+SIGTERM: [libjvm.so+0x923700], sa_mask[0]=11111111011111111101111111111110, sa_flags=SA_RESTART|SA_SIGINFO
+SIGQUIT: [libjvm.so+0x923700], sa_mask[0]=11111111011111111101111111111110, sa_flags=SA_RESTART|SA_SIGINFO
+
+
+---------------  S Y S T E M  ---------------
+
+OS:DISTRIB_ID=LinuxMint
+DISTRIB_RELEASE=18
+DISTRIB_CODENAME=sarah
+DISTRIB_DESCRIPTION="Linux Mint 18 Sarah"
+
+uname:Linux 4.4.0-21-generic #37-Ubuntu SMP Mon Apr 18 18:33:37 UTC 2016 x86_64
+libc:glibc 2.23 NPTL 2.23 
+rlimit: STACK 8192k, CORE 0k, NPROC 47284, NOFILE 65536, AS infinity
+load average:1.03 0.53 0.34
+
+/proc/meminfo:
+MemTotal:       12185124 kB
+MemFree:         3273272 kB
+MemAvailable:    4702004 kB
+Buffers:          102596 kB
+Cached:          1553204 kB
+SwapCached:            0 kB
+Active:          7512288 kB
+Inactive:        1169496 kB
+Active(anon):    7031996 kB
+Inactive(anon):   246208 kB
+Active(file):     480292 kB
+Inactive(file):   923288 kB
+Unevictable:         484 kB
+Mlocked:             484 kB
+SwapTotal:       4074492 kB
+SwapFree:        4074492 kB
+Dirty:                56 kB
+Writeback:             0 kB
+AnonPages:       7026304 kB
+Mapped:           674936 kB
+Shmem:            252224 kB
+Slab:             111856 kB
+SReclaimable:      77256 kB
+SUnreclaim:        34600 kB
+KernelStack:        9392 kB
+PageTables:        46808 kB
+NFS_Unstable:          0 kB
+Bounce:                0 kB
+WritebackTmp:          0 kB
+CommitLimit:    10167052 kB
+Committed_AS:    6377984 kB
+VmallocTotal:   34359738367 kB
+VmallocUsed:           0 kB
+VmallocChunk:          0 kB
+HardwareCorrupted:     0 kB
+AnonHugePages:   1206272 kB
+CmaTotal:              0 kB
+CmaFree:               0 kB
+HugePages_Total:       0
+HugePages_Free:        0
+HugePages_Rsvd:        0
+HugePages_Surp:        0
+Hugepagesize:       2048 kB
+DirectMap4k:      122744 kB
+DirectMap2M:     3952640 kB
+DirectMap1G:     9437184 kB
+
+
+CPU:total 4 (2 cores per cpu, 2 threads per core) family 6 model 69 stepping 1, cmov, cx8, fxsr, mmx, sse, sse2, sse3, ssse3, sse4.1, sse4.2, popcnt, avx, avx2, aes, clmul, erms, lzcnt, ht, tsc, tscinvbit, bmi1, bmi2
+
+/proc/cpuinfo:
+processor	: 0
+vendor_id	: GenuineIntel
+cpu family	: 6
+model		: 69
+model name	: Intel(R) Core(TM) i5-4210U CPU @ 1.70GHz
+stepping	: 1
+microcode	: 0x17
+cpu MHz		: 2400.000
+cache size	: 3072 KB
+physical id	: 0
+siblings	: 4
+core id		: 0
+cpu cores	: 2
+apicid		: 0
+initial apicid	: 0
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 13
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc arch_perfmon pebs bts rep_good nopl xtopology nonstop_tsc aperfmperf eagerfpu pni pclmulqdq dtes64 monitor ds_cpl vmx est tm2 ssse3 sdbg fma cx16 xtpr pdcm pcid sse4_1 sse4_2 movbe popcnt tsc_deadline_timer aes xsave avx f16c rdrand lahf_lm abm epb tpr_shadow vnmi flexpriority ept vpid fsgsbase tsc_adjust bmi1 avx2 smep bmi2 erms invpcid xsaveopt dtherm ida arat pln pts
+bugs		:
+bogomips	: 4789.06
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 39 bits physical, 48 bits virtual
+power management:
+
+processor	: 1
+vendor_id	: GenuineIntel
+cpu family	: 6
+model		: 69
+model name	: Intel(R) Core(TM) i5-4210U CPU @ 1.70GHz
+stepping	: 1
+microcode	: 0x17
+cpu MHz		: 2399.906
+cache size	: 3072 KB
+physical id	: 0
+siblings	: 4
+core id		: 1
+cpu cores	: 2
+apicid		: 2
+initial apicid	: 2
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 13
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc arch_perfmon pebs bts rep_good nopl xtopology nonstop_tsc aperfmperf eagerfpu pni pclmulqdq dtes64 monitor ds_cpl vmx est tm2 ssse3 sdbg fma cx16 xtpr pdcm pcid sse4_1 sse4_2 movbe popcnt tsc_deadline_timer aes xsave avx f16c rdrand lahf_lm abm epb tpr_shadow vnmi flexpriority ept vpid fsgsbase tsc_adjust bmi1 avx2 smep bmi2 erms invpcid xsaveopt dtherm ida arat pln pts
+bugs		:
+bogomips	: 4789.06
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 39 bits physical, 48 bits virtual
+power management:
+
+processor	: 2
+vendor_id	: GenuineIntel
+cpu family	: 6
+model		: 69
+model name	: Intel(R) Core(TM) i5-4210U CPU @ 1.70GHz
+stepping	: 1
+microcode	: 0x17
+cpu MHz		: 2400.000
+cache size	: 3072 KB
+physical id	: 0
+siblings	: 4
+core id		: 0
+cpu cores	: 2
+apicid		: 1
+initial apicid	: 1
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 13
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc arch_perfmon pebs bts rep_good nopl xtopology nonstop_tsc aperfmperf eagerfpu pni pclmulqdq dtes64 monitor ds_cpl vmx est tm2 ssse3 sdbg fma cx16 xtpr pdcm pcid sse4_1 sse4_2 movbe popcnt tsc_deadline_timer aes xsave avx f16c rdrand lahf_lm abm epb tpr_shadow vnmi flexpriority ept vpid fsgsbase tsc_adjust bmi1 avx2 smep bmi2 erms invpcid xsaveopt dtherm ida arat pln pts
+bugs		:
+bogomips	: 4789.06
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 39 bits physical, 48 bits virtual
+power management:
+
+processor	: 3
+vendor_id	: GenuineIntel
+cpu family	: 6
+model		: 69
+model name	: Intel(R) Core(TM) i5-4210U CPU @ 1.70GHz
+stepping	: 1
+microcode	: 0x17
+cpu MHz		: 2399.906
+cache size	: 3072 KB
+physical id	: 0
+siblings	: 4
+core id		: 1
+cpu cores	: 2
+apicid		: 3
+initial apicid	: 3
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 13
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc arch_perfmon pebs bts rep_good nopl xtopology nonstop_tsc aperfmperf eagerfpu pni pclmulqdq dtes64 monitor ds_cpl vmx est tm2 ssse3 sdbg fma cx16 xtpr pdcm pcid sse4_1 sse4_2 movbe popcnt tsc_deadline_timer aes xsave avx f16c rdrand lahf_lm abm epb tpr_shadow vnmi flexpriority ept vpid fsgsbase tsc_adjust bmi1 avx2 smep bmi2 erms invpcid xsaveopt dtherm ida arat pln pts
+bugs		:
+bogomips	: 4789.06
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 39 bits physical, 48 bits virtual
+power management:
+
+
+
+Memory: 4k page, physical 12185124k(3273272k free), swap 4074492k(4074492k free)
+
+vm_info: Java HotSpot(TM) 64-Bit Server VM (25.121-b13) for linux-amd64 JRE (1.8.0_121-b13), built on Dec 12 2016 16:36:53 by "java_re" with gcc 4.3.0 20080428 (Red Hat 4.3.0-8)
+
+time: Sun Apr 15 16:10:46 2018
+elapsed time: 0 seconds (0d 0h 0m 0s)
+
