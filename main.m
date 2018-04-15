@@ -11,7 +11,7 @@ nChannels= 1;         % Number of channels
 recFlag = 0;          % Flag to make new recording
 
 if recFlag == 1
-    recObj = audiorecorder(Fs, 8, nChannels);   % Create audiorecorder object
+    recObj = audiorecorder(Fs, 16, nChannels);   % Create audiorecorder object
     disp('START')
     recordblocking(recObj, Ts);                 % Record for Ts seconds
     disp('STOP') 
@@ -24,18 +24,18 @@ t = 0:1/Fs:(length(s)-1)/Fs;                % Convert samples to time
 
 % Plotting time-domain signal
 figure
-subplot(2,1,1)
+% subplot(2,1,1)
 plot(t,s)
 grid on
 xlabel('Time [s]')
 title('Single tone')
 
-subplot(2,1,2)
-plot(t,s)
-grid on
-xlim([0 2])
-xlabel('Time [s]')
-title('Single tone zoomed in')
+% subplot(2,1,2)
+% plot(t,s)
+% grid on
+% xlim([0 2])
+% xlabel('Time [s]')
+% title('Single tone zoomed in')
 
 % subplot(3,1,3)
 % plot(abs(fft(y)))
@@ -48,7 +48,7 @@ title('Single tone zoomed in')
 
 p = 12;             % Model order
 Ts = 0.3;           % Block size [s]
-startSample = 100;  % What sample the block will start at 
+startSample = 8e3;  % What sample the block will start at 
 
 [s, Fs] = audioread('Vowel.wav');                 % Read file from step 1.1 
 y_block = s(startSample:startSample + Ts*Fs-1);   % Extract block of Ts seconds
@@ -61,8 +61,10 @@ y_block = s(startSample:startSample + Ts*Fs-1);   % Extract block of Ts seconds
 
 %% Step 1.3 Calculate the residual sequence e(n)
 t = 0:1/Fs:(length(y_block)-1)/Fs;
-e = filter(a,1,y_block)/E;              % Filter speech signal with A(z) to get residual sequence
-% KOLLA VAD SOM SKA SKE MED GAIN, G, tror det är vårt E vi får
+
+
+e = filter(a,1,y_block);              % Filter speech signal with A(z) to get residual sequence
+
 figure
 plot(t,e)
 hold on
@@ -74,20 +76,28 @@ legend('Residual sequence', 'Original speech signal')
 
 %% Step 1.4 Re-synthesize the speech using the estimated parameters
 
-y_resynth = filter(E,a(:),e); % KOLLA VAD SOM SKA SKE MED GAIN, G, tror det är vårt E vi får
+y_resynth = filter(1,a,e); 
 
 figure
 subplot(2,1,1)
 plot(t,y_resynth)
+title('Resynthesized speech')
+xlabel('Time [s]')
+grid on
 subplot(2,1,2)
 plot(t,y_block)
+title('Original speech')
 grid on
 xlabel('Time [s]')
-legend('Re-synthesized speech', 'Original speech signal')
+
+
 
 % ------------------------------------------------------------------------
 % -------------------- TASK 2 -------------------------------------------
 % ------------------------------------------------------------------------
+
+
+
 %% Step 2.1 Record Sentence for 15 seconds
 clc, clf, clear, close all
 
@@ -99,7 +109,7 @@ nChannels= 1;           % Number of channels
 % WARNING!! Setting flag to 1 will overwrite old recording
 recFlag = 0;          
 if recFlag == 1
-    recObj = audiorecorder(Fs, 8, nChannels);   % Create audiorecorder object
+    recObj = audiorecorder(Fs, 16, nChannels);   % Create audiorecorder object
     disp('START')
     recordblocking(recObj, Ts);                 % Record for Ts seconds
     disp('STOP') 
@@ -128,7 +138,7 @@ L = length(s)/totBlocks;            % number of samples in each block [samples]
 a = zeros(p+1, totBlocks);          % Parameter matrix a,
 E = zeros(totBlocks,1);             % Variance matrix
 
-% Compute each collumn of a in the same manner as in 1.2
+% Compute each column of a in the same manner as in 1.2
 % Loop through each block and find the parameters and put into matrix a
                       
 for i=1:totBlocks
@@ -137,12 +147,14 @@ for i=1:totBlocks
 end
 
 
+
+
 %% STEP 2.3 Block-based estimation of residual sequence e_hat
 
 e_hat=zeros(totBlocks*L,1);           % Define residual vector
 
 for i=1:totBlocks
-    y_block = s((i-1)*L+1:i*L);        % Extract the j-th block from y       
+    y_block = s((i-1)*L+1:i*L);                             % Extract the i-th block from y       
     e_hat((i-1)*L+1:i*L) = filter(a(:,i),1,y_block);        % Filter speech signal with A(z) to get residual sequence
 end
 
@@ -175,14 +187,26 @@ for i=1:totBlocks
 end
 
 figure
-subplot(2,1,1)
+subplot(3,1,1)
 plot(t,s)
-legend( 'Original speech signal')
-subplot(2,1,2)
+grid on
+title( 'Original speech signal')
+xlabel('Time [s]')
+
+subplot(3,1,2)
 plot(t,s_hat)
 grid on
 xlabel('Time [s]')
-legend('Re-synthesis sequence')
+title('Re-synthesis sequence')
+
+subplot(3,1,3)
+plot(t,e_hat)
+grid on
+xlabel('Time [s]')
+title('Residual sequence')
+
+
+
 
 % ------------------------------------------------------------------------
 % -------------------- TASK 3 -------------------------------------------
@@ -195,7 +219,7 @@ e_tilde = zeros(length(e_hat),1);
 K = L/4;
 
 for i=1:totBlocks
-    sigVals = maxk(abs(e_hat((i-1)*L+1:L*i)),K);    % Find most significant vals
+    sigVals = max(abs(e_hat((i-1)*L+1:L*i)),K);    % Find most significant vals
     [~,loc]=ismember(abs(e_hat),sigVals);       % Check positions
     indx = find(loc);                           % Extract non-zeros vals
     e_tilde(indx) = e_hat(indx);                % Extrac vals from hat to tilde
