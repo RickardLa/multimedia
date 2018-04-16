@@ -130,7 +130,7 @@ title('15 second sentence')
 %% STEP 2.2 Block based speech analysis
 clc
 
-p = 12;                             % number of parameters
+p = 240;                             % number of parameters
 Ts = 15;                            % Length of recorded signal [s]
 durBlock = 0.02;                    % Duration of each block [s]
 totBlocks = Ts/durBlock;            % Total number of blocks
@@ -181,8 +181,7 @@ legend('Residual sequence', 'Original speech signal')
 
 s_hat = zeros(length(s), 1);
 
-for i=1:totBlocks
-    y_block = s((i-1)*L+1:i*L);        % Extract the j-th block from y       
+for i=1:totBlocks    
     s_hat((i-1)*L+1:i*L) = filter(1,a(:,i),e_hat((i-1)*L+1:i*L));
 end
 
@@ -273,22 +272,22 @@ end
 %% Step 4.1
 clc, clf, clear, close
 
-[s, Fs] = audioread('MySentence.wav');    % Read the audio-file
+[s, Fs] = audioread('testPitch.wav');    % Read the audio-file
 
-Ts = 15;                                  % Length of recorded signal [s]
+Ts = 8;                                  % Length of recorded signal [s]
 durBlock = 0.02;                          % Duration of each block [s]
 totBlocks = Ts/durBlock;                  % Total number of blocks
 L = length(s)/totBlocks;                  % Number of samples in each block [samples]
 
+padSize = 3;
 
-
-cep1 = zeros(2*L , totBlocks);
-cep2 = zeros(2*L , totBlocks);
+cep1 = zeros((padSize+1)*L , totBlocks);
+cep2 = zeros((padSize+1)*L , totBlocks);
 
 for i=1:totBlocks
     x = s((i-1) * L + 1 : i * L);            % Divide original speech signal into blocks of length L
     x = x .* hamming(length(x));             % Multiply with Hamming-window to reduce Gibbs effect
-    y = [x; zeros(length(x),1)];             % Pad with zeros
+    y = [x; zeros(padSize*length(x),1)];             % Pad with zeros
     
     cep1(:,i) = log10(abs(fft(y)));           % Spectrum in freq.
     cep2(:,i) = abs(ifft(cep1(:,i)));       % Spectrum in time
@@ -298,26 +297,76 @@ end
 figure;
 c = .5;
 startBlock = 50;                    % Set start block between 1 and 220
-t = (0:1/Fs:(2*L-1)/Fs)/2;
+t = (0:1/Fs:((padSize+1)*L-1)/Fs);
+
 
 for j=startBlock:startBlock+20
-    c1 = cep1(:,j) + j*c; 
     c2 = cep2(:,j) + j*c; 
     
-    
-    subplot(1,2,1)
     plot(t,c2)                        % Time domain plot
     xlabel('Time [s]')
     grid on
     hold on
+    title('Cepstrum for testPitch.wav')
     
-    subplot(1,2,2)
-    plot(1./t,c1)
-    xlabel('Frequency [Hz]')
-    grid on
-    hold on
+
     
 end
+
+
+
+% ------------------------------------------------------------------------
+% -------------------- TASK 5 -------------------------------------------
+% ------------------------------------------------------------------------
+%% Step 5.1
+clc, clf, clear, close
+
+
+[s_tilde, ~] = audioread('stilde.wav');    % Read the audio-file
+[s, Fs] = audioread('MySentence.wav');    % Read the audio-file
+
+p = 12; 
+Ts = 15;                                  % Length of recorded signal [s]
+durBlock = 0.02;                          % Duration of each block [s]
+totBlocks = Ts/durBlock;                  % Total number of blocks
+L = length(s)/totBlocks;                  % Number of samples in each block [samples]
+
+
+% a_orig = zeros(p+1,totBlocks);
+% a_tilde = zeros(p+1, totBlocks); 
+% 
+% A_orig = zeros(p+1,totBlocks);
+% A_tilde = zeros(p+1,totBlocks);
+
+N = 100; 
+for i=1:totBlocks
+    x_orig = s((i-1) * L + 1 : i * L);
+    x_tilde = s_tilde((i-1) * L + 1 : i * L);
+    
+    [a_orig(:,i), E_orig(i)] = lpc(x_orig,p);
+    [a_tilde(:,i), E_tilde(i)] = lpc(x_tilde,p);
+    
+    A_orig(:,i) = 1/abs(fft(a_orig(:,i),N)); 
+    A_tilde(:,i) = 1/abs(fft(a_tilde(:,i),N)); 
+    
+    
+end
+
+f = Fs/2;   
+w0 = 2*pi*f/Fs; 
+w = (0:w0/(N-1):w0)/pi; 
+figure;
+
+idx = randi(totBlocks,1);
+plot(w,abs(A_tilde(:,idx)).^2)
+hold on
+grid on
+plot(w,abs(A_orig(:,idx)).^2)
+legend('Re-synthesized signal', 'Original signal')
+xlabel('pi*radians')
+ylabel('Power')
+
+
 
 
 
