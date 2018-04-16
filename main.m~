@@ -28,7 +28,7 @@ figure
 plot(t,s)
 grid on
 xlabel('Time [s]')
-% title('Single tone')
+title('Single tone')
 
 % subplot(2,1,2)
 % plot(t,s)
@@ -46,8 +46,8 @@ xlabel('Time [s]')
 %% Step 1.2 Estimate the LPC model parameters
 %clc, clf, clear, close all
 
-p = 0;            % Model order
-Ts = 1;           % Block size [s]
+p = 12;             % Model order
+Ts = 0.3;           % Block size [s]
 startSample = 8e3;  % What sample the block will start at 
 
 [s, Fs] = audioread('Vowel.wav');                 % Read file from step 1.1 
@@ -57,7 +57,6 @@ y_block = s(startSample:startSample + Ts*Fs-1);   % Extract block of Ts seconds
 % LPC on segment. 'A' contains model parameters, 'E' is the variance of the
 % prediction errors 
 [a, E] = lpc(y_block,p);
- 
 
 
 %% Step 1.3 Calculate the residual sequence e(n)
@@ -131,8 +130,8 @@ title('15 second sentence')
 %% STEP 2.2 Block based speech analysis
 clc
 
-p = 0;                             % number of parameters
-Ts = 15;                           % Length of recorded signal [s]
+p = 240;                             % number of parameters
+Ts = 15;                            % Length of recorded signal [s]
 durBlock = 0.02;                    % Duration of each block [s]
 totBlocks = Ts/durBlock;            % Total number of blocks
 L = length(s)/totBlocks;            % number of samples in each block [samples]
@@ -166,7 +165,7 @@ figure
 plot(t,e_hat)
 grid on
 xlabel('Time [s]')
-% title('Residuals for sentence')
+title('Residuals for sentence')
 
 % Plots the residual and compared with the signal
 % Zoom in on two blocks (40ms and save)
@@ -205,8 +204,6 @@ grid on
 xlabel('Time [s]')
 title('Residual sequence')
 
-
-audiowrite('shat.wav', s_hat, Fs)
 
 
 
@@ -310,7 +307,7 @@ for j=startBlock:startBlock+20
     xlabel('Time [s]')
     grid on
     hold on
-%     title('Cepstrum for testPitch.wav')
+    title('Cepstrum for testPitch.wav')
     
 
     
@@ -322,7 +319,7 @@ end
 % -------------------- TASK 5 -------------------------------------------
 % ------------------------------------------------------------------------
 %% Step 5.1
-clc, clf, clear, close all
+clc, clf, clear, close
 
 
 [s_tilde, ~] = audioread('stilde.wav');    % Read the audio-file
@@ -335,14 +332,13 @@ totBlocks = Ts/durBlock;                  % Total number of blocks
 L = length(s)/totBlocks;                  % Number of samples in each block [samples]
 
 
+% a_orig = zeros(p+1,totBlocks);
+% a_tilde = zeros(p+1, totBlocks); 
+% 
+% A_orig = zeros(p+1,totBlocks);
+% A_tilde = zeros(p+1,totBlocks);
+
 N = 200; 
-a_orig = zeros(p+1,totBlocks);
-a_tilde = zeros(p+1, totBlocks); 
-
-A_orig = zeros(N,totBlocks);
-A_tilde = zeros(N,totBlocks);
-
-
 for i=1:totBlocks
     x_orig = s((i-1) * L + 1 : i * L);
     x_tilde = s_tilde((i-1) * L + 1 : i * L);
@@ -373,12 +369,7 @@ ylabel('dB')
 
 figure;
 plot(1:totBlocks, d)
-xlabel('Block number')
-ylabel('dB')
-grid on
-
-
-
+xla
 
 
 
