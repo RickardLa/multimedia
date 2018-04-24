@@ -118,8 +118,7 @@ allBlocks = mat2cell(originalImg, vectorHeight ,vectorWidth );
 DCTBlocks = zeros(height, width);
 for i=1:totHeight       
     for j=1:totWidth   
-        block = dct2(allBlocks{i,j});
-        DCTBlocks((i-1)*L+1:i*L,(j-1)*L+1:j*L) = block; 
+        DCTBlocks((i-1)*L+1:i*L,(j-1)*L+1:j*L) = dct2(allBlocks{i,j}); 
     end
 end
 
