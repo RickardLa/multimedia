@@ -128,5 +128,69 @@ imagesc(log(abs(DCTBlocks))), colormap(gca,jet)
 title('DCT Domain')
 axis off;
 
+% 2.3 COMPRESS
+
+th = floor(0.9 * totWidth * totHeight);
+
+% Reshape matrix to 1-column and order DCTCoeff in ascending order
+vectorDCTBlocks = reshape(DCTBlocks, 1, []); 
+ascendDCT = sort(abs(vectorDCTBlocks)); 
+
+% Assign threshold 
+thresholdBlocks = ascendDCT(th);
+
+% If abs(coefficient)<= threshold, set to 0
+compressedDCTBlocks = DCTBlocks;
+compressedDCTBlocks(abs(compressedDCTBlocks)<=thresholdBlocks) = 0; 
+
+% 2.4 Inverse DCT of compressedDCT
+
+% Create the blocks by converting image from a matrix to cell
+allCmprsdBlocks = mat2cell(compressedDCTBlocks, vectorHeight ,vectorWidth );
+
+% Now compute IDCT of all blocks and store them in DCTBlocks
+DCTBlocks = zeros(height, width);
+for i=1:totHeight       
+    for j=1:totWidth   
+        block = idct2(allCmprsdBlocks{i,j});
+        IDCTBlocks((i-1)*L+1:i*L,(j-1)*L+1:j*L) = block; 
+    end
+end
+
+errorImg = abs(originalImg - IDCTBlocks);
+errorImg30 = 30*abs(originalImg - IDCTBlocks);
+
+PSNR = psnr(IDCTBlocks, originalImg)         % PSNR in dB
+SSIM = ssim(IDCTBlocks, originalImg)         % SSIM = 1 means the images are identical
+
+%%
+colormap gray;
+subplot(2,2,1)
+imagesc(originalImg)
+title('Original')
+axis off;
+
+subplot(2,2,2)
+imagesc(IDCTBlocks)
+title('Compressed')
+axis off;
+
+subplot(2,2,3)
+imagesc(errorImg30)
+title('Error')
+axis off;
+
+subplot(2,2,4)
+imagesc(log(abs(DCTBlocks))), colormap(gca,jet)
+title('DCT Domain')
+axis off;
+
+
+
+
+
+
+
+
 
 
