@@ -130,7 +130,7 @@ axis off;
 
 % 2.3 COMPRESS
 
-th = floor(0.9 * totWidth * totHeight);
+th = floor(0.9 * width * height);
 
 % Reshape matrix to 1-column and order DCTCoeff in ascending order
 vectorDCTBlocks = reshape(DCTBlocks, 1, []); 
@@ -163,7 +163,6 @@ errorImg30 = 30*abs(originalImg - IDCTBlocks);
 PSNR = psnr(IDCTBlocks, originalImg)         % PSNR in dB
 SSIM = ssim(IDCTBlocks, originalImg)         % SSIM = 1 means the images are identical
 
-%%
 colormap gray;
 subplot(2,2,1)
 imagesc(originalImg)
@@ -185,8 +184,6 @@ imagesc(log(abs(DCTBlocks))), colormap(gca,jet)
 title('DCT Domain')
 axis off;
 
-figure
-imagesc(log(abs(DCTBlocks))), colormap(gca,jet)
 
 
 
