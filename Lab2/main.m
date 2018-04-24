@@ -149,7 +149,7 @@ compressedDCTBlocks(abs(compressedDCTBlocks)<=thresholdBlocks) = 0;
 allCmprsdBlocks = mat2cell(compressedDCTBlocks, vectorHeight ,vectorWidth );
 
 % Now compute IDCT of all blocks and store them in DCTBlocks
-DCTBlocks = zeros(height, width);
+IDCTBlocks = zeros(height, width);
 for i=1:totHeight       
     for j=1:totWidth   
         block = idct2(allCmprsdBlocks{i,j});
@@ -185,8 +185,8 @@ imagesc(log(abs(DCTBlocks))), colormap(gca,jet)
 title('DCT Domain')
 axis off;
 
-
-
+figure
+imagesc(log(abs(DCTBlocks))), colormap(gca,jet)
 
 
 
