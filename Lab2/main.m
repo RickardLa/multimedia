@@ -105,7 +105,7 @@ width = width - 1;
 originalImg = originalImg(1:height,1:width);     
 
 % Step 2.2
-L = 8;                                        % 8x8 pixels per block
+L = 16;                                        % 8x8 pixels per block
 totHeight = height/L;                         % Total number of height blocks
 totWidth = width/L;                           % Total number of width blocks
 
@@ -233,7 +233,7 @@ Inew = mat2gray(imread('Figures/frame20.bmp','bmp'));
 
 % Removing border-pixels so (height*width)/blockSize has no remainder
 
-th=50/255;
+th=100/255;
 Idiff = Iold-Inew;
 Idiff(abs(Idiff) < th)=0;
 
@@ -255,7 +255,8 @@ IdiffCell = mat2cell(Idiff, vectorHeight, vectorWidth);
 oldCell = mat2cell(Iold, vectorHeight, vectorWidth);
 newCell = mat2cell(Inew, vectorHeight, vectorWidth);
 
-%%
+%% MOTION MATRIX
+
 Imotion = zeros(height,width);
 
 for i = 1:totHeight
@@ -297,23 +298,24 @@ axis off;
 clc
 MV = zeros(totHeight, totWidth, 2);
 
-
 % Loop through Inew and search in old to find best match
 
 for newPosX=1:totHeight
     for newPosY = 1:totWidth
         if sum(sum(Imotion((newPosX-1)*L+1:newPosX*L,(newPosY-1)*L+1:newPosY*L))) ~= 0
-            currMat=newCell{newPosX,newPosY};
+            currBlock=newCell{newPosX,newPosY};
             bestVal=inf;
-            for oldPosX = 1:totHeight
-                for oldPosY = 1:totWidth
-                    currMAE=(1/(L*L))*abs(currMat-oldCell{oldPosX,oldPosY});
-                    if currMAE<bestVal
+            for oldPosX = 1:height-16
+                for oldPosY = 1:width-16
+                    idxX=oldPosX:oldPosX+15;
+                    idxY=oldPosY:oldPosY+15;
+                    currMAE=sum(sum(abs(currBlock-Iold(idxX,idxY))));
+                    if currMAE < bestVal
                         bestVal = currMAE;
 %                         MV(newPosX,newPosY,1)=newPosX-oldPosX;
 %                         MV(newPosX,newPosY,2)=newPosY-oldPosY;
-                        MV(newPosX,newPosY,1)=oldPosX-newPosX;
-                        MV(newPosX,newPosY,2)=oldPosY-newPosY;
+                        MV(newPosX,newPosY,1)=oldPosX-(newPosX-1)*L;
+                        MV(newPosX,newPosY,2)=oldPosY-(newPosY-1)*L;
                     end
                 end
             end
@@ -328,12 +330,17 @@ for i=1:totHeight
     for j=1:totWidth
         indxX=((i-1)*L+1:i*L);
         indxY=(j-1)*L+1:j*L;
-        Icomp((i-1)*L+1:i*L,(j-1)*L+1:j*L)=Iold(indxX+MV(i,j,1),indxY+MV(i,j,2));
+        Icomp(indxX,indxY)=Iold(indxX+MV(i,j,1),indxY+MV(i,j,2));
+        
     end
 end
 
+error=Inew-Icomp;
+figure
 colormap gray
 imagesc(Icomp)
-
-
-
+figure
+colormap gray
+imagesc(Iold)
+figure
+imagesc(error), colormap gray
