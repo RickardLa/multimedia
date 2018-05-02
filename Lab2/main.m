@@ -124,19 +124,7 @@ for i=1:totHeight
     end
 end
 
-% for i=1:totHeight
-%     for j=1:totWidth
-%         block=originalImg(((i-1)*L+1):L*i,((i-1)*L+1):L*i);
-%         DCTBlocks(((i-1)*L+1):L*i,((i-1)*L+1):i*L) = dct2(block);
-% end
-
-figure
-imagesc(log(abs(DCTBlocks))),% colormap(gca,jet)
-title('DCT Domain')
-axis off;
-
 % 2.3 COMPRESS
-
 th = floor(0.9 * width * height);
 
 % Reshape matrix to 1-column and order DCTCoeff in ascending order
@@ -151,7 +139,6 @@ compressedDCTBlocks = DCTBlocks;
 compressedDCTBlocks(abs(compressedDCTBlocks)<=thresholdBlocks) = 0; 
 
 % 2.4 Inverse DCT of compressedDCT
-
 % Create the blocks by converting image from a matrix to cell
 allCmprsdBlocks = mat2cell(compressedDCTBlocks, vectorHeight ,vectorWidth );
 
@@ -191,11 +178,6 @@ subplot(2,2,4)
 imshow(DCTBlocks), %colormap(gca,jet), colorbar
 title('DCT Domain')
 axis off;
-
-figure
-imshow(DCTBlocks), %colormap(gca,jet), colorbar
-
- 
 
 
 %% ------------------------------------------------------------------------
@@ -243,12 +225,12 @@ Inew = mat2gray(imread('frame11.bmp','bmp'));
 Iold = mat2gray(imread('waveletCompressed10.bmp','bmp'));
 Iold_orig = mat2gray(imread('Figures/frame10.bmp','bmp'));
 
+% Removing border-pixels so (height*width)/blockSize has no remainder
 Inew = Inew(1:end-1,1:end-1);
 Iold = Iold(1:end-1,1:end-1);
-% Removing border-pixels so (height*width)/blockSize has no remainder
 
 th=45/255;
-Idiff = Iold-Inew;
+Idiff = abs(Iold-Inew);
 Idiff(abs(Idiff) < th)=0;
 
 [height, width] = size(Idiff); 
@@ -280,10 +262,7 @@ for i = 1:totHeight
         end
     end
 end
-     
-imagesc(Imotion), colormap gray
-
-            
+         
 figure
 colormap gray;
 subplot(2,2,1)
@@ -302,7 +281,7 @@ title('Motion')
 axis off;
 
 subplot(2,2,4)
-imagesc(Idiff), %colormap(gca,jet)
+imagesc(Idiff)
 title('Diff')
 axis off;
 
@@ -313,7 +292,6 @@ clc, close all
 MV = zeros(totHeight, totWidth, 2);
 
 % Loop through Inew and search in old to find best match
-
 for newPosX=1:totHeight
     for newPosY = 1:totWidth
         if sum(sum(Imotion((newPosX-1)*L+1:newPosX*L,(newPosY-1)*L+1:newPosY*L))) ~= 0
@@ -326,8 +304,6 @@ for newPosX=1:totHeight
                     currMAE=sum(sum(abs(currBlock-Iold(idxX,idxY))));
                     if currMAE < bestVal
                         bestVal = currMAE;
-%                         MV(newPosX,newPosY,1)=newPosX-oldPosX;
-%                         MV(newPosX,newPosY,2)=newPosY-oldPosY;
                         MV(newPosX,newPosY,1)=oldPosX-(newPosX-1)*L;
                         MV(newPosX,newPosY,2)=oldPosY-(newPosY-1)*L;
                     end
@@ -341,6 +317,7 @@ end
 Icomp = zeros(height, width);
 
 % I4
+I4 = zeros(240,320);
 for i=1:totHeight
     for j=1:totWidth
         indxX=((i-1)*L+1:i*L);
@@ -364,7 +341,7 @@ for i=1:totHeight
 end
 
 
-error=Inew-I5;
+error30=30*abs(Inew-I5);
 
 figure
 colormap gray
@@ -379,11 +356,7 @@ subplot(2,2,3)
 imagesc(I5)
 % Plot Error
 subplot(2,2,4)
-imagesc(error)
+imagesc(error30)
 
-PSNR = psnr(I5, Inew)         % PSNR in dB
-SSIM = ssim(I5, Inew)         % SSIM = 1 means the images are identical
-
-
-
-
+PSNR = psnr(I5, Inew)        
+SSIM = ssim(I5, Inew)        
