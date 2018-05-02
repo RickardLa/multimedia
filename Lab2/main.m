@@ -24,7 +24,7 @@ I11 = rgb2gray(mov(11).frames);
 I2 = rgb2gray(mov(20).frames);
 
 % imwrite(I1, 'Figures/frame10.bmp', 'bmp');
-imwrite(I11, 'frame11.bmp', 'bmp');
+% imwrite(I11, 'frame11.bmp', 'bmp');
 % imwrite(I2, 'Figures/frame20.bmp', 'bmp');
 
 imagesc(I1), colormap gray
