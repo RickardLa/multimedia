@@ -20,15 +20,16 @@ end
 
 % Saving two Grayscale-images, 10 frames apart. 
 I1 = rgb2gray(mov(10).frames);
-I2 = rgb2gray(mov(11).frames); 
-%I2 = rgb2gray(mov(20).frames);
+I11 = rgb2gray(mov(11).frames); 
+I2 = rgb2gray(mov(20).frames);
 
-imwrite(I1, 'Figures/frame10.bmp', 'bmp');
-imwrite(I2, 'Figures/frame20.bmp', 'bmp');
+% imwrite(I1, 'Figures/frame10.bmp', 'bmp');
+imwrite(I11, 'frame11.bmp', 'bmp');
+% imwrite(I2, 'Figures/frame20.bmp', 'bmp');
 
-% imagesc(I1), colormap gray
-% figure
-% imagesc(I2), colormap gray
+imagesc(I1), colormap gray
+figure
+imagesc(I2), colormap gray
 
 %% Step 1.2
 clc, close
@@ -37,7 +38,7 @@ originalImg = mat2gray(I1);
 DCTCoeff = dct2(originalImg); 
 
 
-% imshow(log(abs(DCTCoeff)),[]), colormap(gca,jet), colorbar
+imshow(log(abs(DCTCoeff))), colormap(gca,jet), colorbar
 
 
 %% Step 1.3
@@ -84,8 +85,7 @@ title('Error')
 axis off;
 
 subplot(2,2,4)
-imagesc(log(abs(DCTCoeff))), colormap(gca,jet)
-title('DCT Domain')
+imshow(log(abs(DCTCoeff))), %colormap(gca,jet)
 axis off;
 
 %saveas(gca, 'Figures/Compressed.eps','epsc');
@@ -105,7 +105,7 @@ width = width - 1;
 originalImg = originalImg(1:height,1:width);     
 
 % Step 2.2
-L = 16;                                        % 8x8 pixels per block
+L = 8;                                        % 8x8 pixels per block
 totHeight = height/L;                         % Total number of height blocks
 totWidth = width/L;                           % Total number of width blocks
 
@@ -124,8 +124,14 @@ for i=1:totHeight
     end
 end
 
+% for i=1:totHeight
+%     for j=1:totWidth
+%         block=originalImg(((i-1)*L+1):L*i,((i-1)*L+1):L*i);
+%         DCTBlocks(((i-1)*L+1):L*i,((i-1)*L+1):i*L) = dct2(block);
+% end
 
-imagesc(log(abs(DCTBlocks))), colormap(gca,jet)
+figure
+imagesc(log(abs(DCTBlocks))),% colormap(gca,jet)
 title('DCT Domain')
 axis off;
 
@@ -149,7 +155,7 @@ compressedDCTBlocks(abs(compressedDCTBlocks)<=thresholdBlocks) = 0;
 % Create the blocks by converting image from a matrix to cell
 allCmprsdBlocks = mat2cell(compressedDCTBlocks, vectorHeight ,vectorWidth );
 
-% Now compute IDCT of all blocks and store them in DCTBlocks
+% Now compute IDCT of all blocks and store them in IDCTBlocks
 IDCTBlocks = zeros(height, width);
 for i=1:totHeight       
     for j=1:totWidth   
@@ -181,10 +187,12 @@ title('Error')
 axis off;
 
 subplot(2,2,4)
-imagesc(log(abs(DCTBlocks))), %colormap(gca,jet)
+imshow(DCTBlocks), %colormap(gca,jet), colorbar
 title('DCT Domain')
 axis off;
 
+figure
+imshow(DCTBlocks), %colormap(gca,jet), colorbar
 
 %% ------------------------------------------------------------------------
 % -------------------- TASK 1.3 -------------------------------------------
