@@ -9,105 +9,90 @@ signal = sin(t);
 % figure
 % plot(signal)
 
-%% Block 1 - Generate signal EJ KLART; ANVÄND SYNTHETIC SIGNAL
-% EJ FÄRDIGT!
-% clc, clear, close all
-% originalImg = mat2gray(imread('lena.bmp','bmp')); % Load image file
-% [height, width] = size(originalImg); 
-% imshow(originalImg)         % Display original image
-% 
-% R_comp = 0.5; % Compression ratio => Remove 256*256*0.5 coefficients
-% N1 = height-round(R_comp*16^2);  
-% 
-% % Step 2.2
-% L = 16;                                       % 16x16 pixels per block
-% totHeight = height/L;                         % Total number of height blocks
-% totWidth = width/L;                           % Total number of width blocks
-% 
-% vectorHeight = L * ones(1, totHeight);
-% vectorWidth = L * ones(1, totWidth);
-% 
-% % Create the blocks by converting image from a matrix to cell
-% allBlocks = mat2cell(originalImg, vectorHeight ,vectorWidth );
-% 
-% % Now compute DCT of all blocks and store them in DCTBlocks
-% DCTBlocks  = zeros(height, width);
-% compressedDCTBlocks  = zeros(height, width);
-% compressedDCTBlock = zeros(1,L^2);  % Store temp block in for compression
-% 
-% for i=1:totHeight       
-%     for j=1:totWidth   
-%         block = dct2(allBlocks{i,j});
-%         DCTBlocks((i-1)*L+1:i*L,(j-1)*L+1:j*L) = block; 
-%         
-%         % Find threshold value for each block
+%% Block 1
+clc, clear, close all
+originalImg = mat2gray(imread('lena.bmp','bmp')); % Load image file
+[height, width] = size(originalImg); 
+imshow(originalImg)         % Display original image
+
+R_comp = 0.5; % Compression ratio => Remove 256*256*0.5 coefficients
+N1 = height-round(R_comp*16^2);  
+
+% Step 2.2
+L = 16;                                       % 16x16 pixels per block
+totHeight = height/L;                         % Total number of height blocks
+totWidth = width/L;                           % Total number of width blocks
+
+vectorHeight = L * ones(1, totHeight);
+vectorWidth = L * ones(1, totWidth);
+
+% Create the blocks by converting image from a matrix to cell
+allBlocks = mat2cell(originalImg, vectorHeight ,vectorWidth );
+
+% Now compute DCT of all blocks and store them in DCTBlocks
+DCTBlocks  = zeros(height, width);
+compressedDCTBlocks  = zeros(height, width);
+block = zeros(L); % Store the temporary block in.
+compressedDCTBlock = zeros(L);  % Store temp block in for compression
+totVec = zeros(1,(height^2)*R_comp);    % Store all 1d koefficients here
+n=1;    % Itterator for totVec
+
+for i=1:totHeight       
+    for j=1:totWidth   
+        block = dct2(allBlocks{i,j});
+        DCTBlocks((i-1)*L+1:i*L,(j-1)*L+1:j*L) = block; 
+        
+        % Find threshold value for each block (behövs ej?)
 %         vectorBlock=reshape(block, 1, []); 
 %         ascendDCT = sort(abs(vectorBlock),'descend');
 %         thresholdBlock = ascendDCT(N1);
-%         
-%         % zig zag scan
-%         
-%         
-%         % Compress
-%         compressedDCTBlock = block;
-%         compressedDCTBlock(abs(compressedDCTBlock)<=thresholdBlock) = 0;      
-%         compressedDCTBlocks((i-1)*L+1:i*L,(j-1)*L+1:j*L) = compressedDCTBlock; 
-%     end
-% end
-% 
-% % Zig-Zag scanning - Generate 1d vector of DCT-coeffs
-% 
-% 
-% %% Block 12 EJ FÄRDIGT
-% % 2.4 Inverse DCT of compressedDCT
-% % Create the blocks by converting image from a matrix to cell
-% allCmprsdBlocks = mat2cell(compressedDCTBlocks, vectorHeight ,vectorWidth );
-% 
-% % Now compute IDCT of all blocks and store them in IDCTBlocks
-% IDCTBlocks = zeros(height, width);
-% for i=1:totHeight       
-%     for j=1:totWidth   
-%         block = idct2(allCmprsdBlocks{i,j});
-%         IDCTBlocks((i-1)*L+1:i*L,(j-1)*L+1:j*L) = block; 
-%     end
-% end
-% 
-% %imwrite(IDCTBlocks, 'blockCompLena.bmp', 'bmp');
-% errorImg = abs(originalImg - IDCTBlocks);
-% errorImg30 = 30*abs(originalImg - IDCTBlocks);
-% 
-% PSNR = psnr(IDCTBlocks, originalImg)         % PSNR in dB
-% SSIM = ssim(IDCTBlocks, originalImg)         % SSIM = 1 means the images are identical
-% 
-% colormap gray;
-% subplot(2,2,1)
-% imagesc(originalImg)
-% title('Original')
-% axis off;
-% 
-% subplot(2,2,2)
-% imagesc(IDCTBlocks)
-% title('Compressed')
-% axis off;
-% 
-% subplot(2,2,3)
-% imagesc(errorImg30)
-% title('Error')
-% axis off;
-% 
-% subplot(2,2,4)
-% imshow(DCTBlocks), %colormap(gca,jet), colorbar
-% title('DCT Domain')
-% axis off;
+        
+       % Performe zig-zag scan (set the last 128 values to zero)
+       % Komprimmerar samtidigt som zig-zags and colt-45.
+       block = fliplr(triu(fliplr(block))); % Flipl and remove upper righ, flip back
+       for k=16:-1:9
+           block(k,16-(k-1))=0;
+       end
+       blockVec = zigzag(block);    % Stolen algortithm , implement our own!!
+       totVec((n-1)*N1+1:N1*n) = blockVec(1:N1);
+       totVecCheck((n-1)*width+1:width*n) = blockVec;
+       
+       compressedDCTBlocks((i-1)*L+1:i*L,(j-1)*L+1:j*L)=block; 
+       n = n+1;
+    end
+end
+
+
+%% Last block
+% input totVec, Output Lena
+
+% Put back zeros in order to reconstruct DCT matrix
+
+newVec = zeros(1,width^2);
+
+for i = 1:2:width*2
+    j=ceil(i/2);
+    newVec((i-1)*N1+1:N1*i) = totVec((j-1)*N1+1:N1*j);
+end
+
+% PERFORM izigzag on all the sequences and put  in matrix
+
+
 
 %% Block 2 - Scalar quantification
-% Valdigt osaker pa detta steg, inte riktigt saker pa hur vardena och
+% osaker pa detta steg, inte riktigt saker pa hur vardena och
 % intervallen ska vara.. Det ska vara 8 bits => 256 nivåer, misstänker att
-% längden på codebook ska vara 256 , inte 8...
+% längden på codebook ska vara 256 
 
-partition = [-1:.3:1]; % Length 7, to represent 7 intervals
-codebook = [-1.2:.3:1]; % Length 8, one entry for each interval
-[index,quants] = quantiz(signal,partition,codebook); % Quantize.
+% For Synthtetic signal with values in range from -1 to 1
+partition = linspace(-1,1,257); % To represent 257 intervalls, (will not take first and last)
+codebook = linspace(-1,1,256);
+
+% For image signal with DCT coefficients as signal
+% partition = IMPLEMENT!
+% codebook = IMPLEMENT!
+
+[index,quants] = quantiz(signal,partition(2:end-1),codebook); % Quantize.
 
 % Plot signal and quantized signal
 plot(t,signal,'x',t,quants,'.')
