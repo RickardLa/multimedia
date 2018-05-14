@@ -92,15 +92,15 @@ grid on
 %% Block 3 Packetization
 
 % PACKETIZATION
-k = 127; % Symbols per packet
-nPkts = ceil(length(index)/k); % Number of packets
+k = 128; % Symbols per packet
+nPkts = (length(index)/k); % Number of packets
 
 % padd with NaN if last packet is not long enough
-indexPad = zeros(1,nPkts*k);    
-indexPad(1:length(index))=index;
+% indexPad = zeros(1,nPkts*k);    
+% indexPad(1:length(index))=index;
 
 % Create matrix with packages, number of rows equals number of packets
-packetMatrix = reshape(indexPad,k,nPkts);
+packetMatrix = reshape(index,k,nPkts);
 
 %% Block 4 Reed Solomon encoding
 m = 8; % Number of bits per symbol
@@ -118,10 +118,6 @@ dec_pktMtrx = dec_msg.x;
 dec_pktMtrx = packetMatrix;
 [nPkts, nSyms] = size(dec_pktMtrx);
 indexRx = reshape(dec_pktMtrx, 1,numel(dec_pktMtrx)); % Reshape to vector
-
-%Remove zero paddings
-endIdx = find(indexRx==0);    % find first padd
-indexRx=indexRx(1:endIdx-1);      % Remove the zeros
 
 
 %% BLOCK 11 Generate the received DFT coefficients
