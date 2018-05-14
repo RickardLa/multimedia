@@ -1,13 +1,13 @@
 
-%% Block 1 - Generate a Synthetic signal
-
-clc, clear all, close all
-
-t=[0:0.1:10*pi];
-signal = sin(t);
-
-% figure
-% plot(signal)
+% %% Block 1 - Generate a Synthetic signal
+% 
+% clc, clear all, close all
+% 
+% t=[0:0.1:10*pi];
+% signal = sin(t);
+% 
+% % figure
+% % plot(signal)
 
 %% Block 1
 clc, clear, close all
@@ -72,11 +72,16 @@ end
 % längden på codebook ska vara 256 
 
 % For Synthtetic signal with values in range from -1 to 1
-partition = linspace(-4,14,257); % To represent 257 intervalls, (will not take first and last)
-codebook = linspace(-4,14,256);
+% partition = linspace(-5,15,257); % To represent 257 intervalls, (will not take first and last)
+% codebook = linspace(-5,15,256);
+% 
+% 
+% [index,quants] = quantiz(TxVec,partition(2:end-1),codebook); % Quantize.
+m = 8;      % Bits/sample
 
-
-[index,quants] = quantiz(TxVec,partition(2:end-1),codebook); % Quantize.
+partition = linspace(min(TxVec),max(TxVec),2^m-1);
+codebook = linspace(min(TxVec),max(TxVec),2^m); 
+[index, quants] = quantiz(TxVec,partition, codebook);
 
 % Plot signal and quantized signal
 figure
@@ -167,7 +172,7 @@ end
 % Now compute IDCT of all blocks and store them in IDCTBlocks
 IDCTBlocks = zeros(height, width);
 for i=1:totHeight       
-    for j=1:totWidth   
+    for j=1:totWidth
         block = idct2(RxDCTBlocks{i,j});
         IDCTBlocks((i-1)*L+1:i*L,(j-1)*L+1:j*L) = block; 
     end
@@ -178,3 +183,6 @@ colormap gray
 imshow(IDCTBlocks)
 title('Compressed')
 axis off;
+
+PSNR = psnr(IDCTBlocks, originalImg)         % PSNR in dB
+SSIM = ssim(IDCTBlocks, originalImg)         % SSIM = 1 means the images are identical
