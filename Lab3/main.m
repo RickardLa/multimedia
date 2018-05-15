@@ -65,36 +65,34 @@ indexPad(1:length(index)) = index;
 packetMatrix = reshape(indexPad,k,nPkts)';
 
 %% Block 4 Reed Solomon encoding
-n = 2^m-1;
+n = 2^m-1;n 
 msgwords=gf(packetMatrix, m);
 codes = rsenc(msgwords,n,k);
-codewords = codes.x;
+
 
 %% Block 5 Interleaving
 clc
 load('codewords.mat');
-% codewords = transpose(codewords);
+codewords = transpose(codes);
+% codewords = codes;
+
 %% Block 7 Bit errors and packet losses
 clc
 
-mode = "packetloss";      % 'biterrors' or 'packetloss'
-
+mode = "biterror";      % 'biterrors' or 'packetloss'
+[row, col] = size(codewords);
 switch mode
     case "biterror"
-        t = floor((n-k)/2);                                   % Number of erros per codeword
+%         t = floor((n-k)/2);                                 % Number of erros per codeword
+        t = 65;
         nw = length(codewords);                               % Number of codewords
-        noise = (1 + randi(nw,nw,n)) .* randerr(nw,n,t);      % Generate noise-matrix
-        
-        noisyCode = codewords + uint32(noise);                % Convert to same data type and add noise
-        noisyCode(noisyCode>n) = n;                           % Max-value is 255 for gf()
-        noisyCode = gf(noisyCode,m);                          % Create Galois array for rsdec()
-    
+        noise = randi(n,row,col) .* randerr(row,col,t);       % Generate noise-matrix
+        noisyCode = codewords + noise;                        % Convert to same data type and add noise 
     case "packetloss"
         lostPackets = floor(errorRate * nPkts);               % Number of lost packets
-        idx = randperm(nPkts, lostPackets);                   % Non-repeating random indices
-        
+        idx = randperm(n, lostPackets);                       % Non-repeating random indices
         codewords(idx,:) = 0;                                 % Set entire row to zero if lost
-        noisyCode = gf(codewords,m);                          % Create Galois array for rsdec()              
+        noisyCode = codewords;
 end
 
 
@@ -108,6 +106,8 @@ dec_pktMtrx = dec_msg.x;
 [nPkts, nSyms] = size(dec_pktMtrx);
 indexRx = reshape(dec_pktMtrx', 1,numel(dec_pktMtrx)); % Reshape to vector
 indexRx = indexRx(1:height^2*R_comp);
+
+
 
 %% BLOCK 11 Generate the received DFT coefficients
 
