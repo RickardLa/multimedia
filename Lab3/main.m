@@ -36,7 +36,7 @@ DCTBlocks  = zeros(height, width);
 compressedDCTBlocks  = zeros(height, width);
 block = zeros(L); % Store the temporary block in.
 compressedDCTBlock = zeros(L);  % Store temp block in for compression
-TxVec = zeros(1,(height^2)*R_comp);    % Store all 1d koefficients here
+TxVec = zeros(1,end-(height^2)*R_comp);    % Store all 1d koefficients here
 n=1;    % Itterator for totVec
 
 for i=1:totHeight       
@@ -78,7 +78,6 @@ end
 % 
 % [index,quants] = quantiz(TxVec,partition(2:end-1),codebook); % Quantize.
 m = 8;      % Bits/sample
-
 partition = linspace(min(TxVec),max(TxVec),2^m-1);
 codebook = linspace(min(TxVec),max(TxVec),2^m); 
 [index, quants] = quantiz(TxVec,partition, codebook);
@@ -89,7 +88,7 @@ plot(TxVec,'x')
 hold on
 plot(quants,'.')
 legend('Original signal','Quantized signal');
-axis([-.1 6.5 -1.2 1.2])
+%axis([-.1 6.5 -1.2 1.2])
 grid on
 
 
@@ -113,7 +112,14 @@ n = 2^m-1;
 % Block 9 Reed Solomon Decode
 msgwords=gf(packetMatrix, m);
 codes = rsenc(msgwords,n,k);
-codewords = codes.x;
+%codewords = codes.x;
+
+%% Add noise
+t=50;
+noise = (1+randi(nPkts,n,2^m-1)).*randerr(nPkts,n,t);
+cnoisy = codes + noise;
+[dc, nerrs, corrcode] =rsdec(cnoisy, n, k);
+
 
 %% Block 9 Reed Solomon decoding
 dec_msg = rsdec(codes,n,k);
@@ -126,7 +132,7 @@ indexRx = reshape(dec_pktMtrx', 1,numel(dec_pktMtrx)); % Reshape to vector
 indexRx = indexRx(1:256^2/2);
 
 %% BLOCK 11 Generate the received DFT coefficients
-%indexRx = index;
+indexRx = index;
 quantDCT = codebook(indexRx+1);
 
 % Step 1.4 Verify
@@ -144,6 +150,7 @@ legend('Original signal','Received Quantized signal');
 %% Block 12 Last block
 
 % Put back zeros in order to reconstruct DCT matrix
+%quantDCT=TxVec;
 newVec = zeros(1,width^2);
 
 for i = 1:2:width*2
