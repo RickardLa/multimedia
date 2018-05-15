@@ -1,10 +1,11 @@
 %% Parameters
 clc, clear, close all
 
-R_comp = 0.5;                                 % Compression ratio => Remove 256*256*0.5 coefficients
+R_comp = 0.5;                                 % Compression ratio
 L = 16;                                       % 16x16 pixels per block
 m = 8;                                        % Bits/sample
 k = 127;                                      % Symbols per packet
+errorRate = 0.2;                              % Lost packets [%]
 
 %% Block 1
 originalImg = mat2gray(imread('lena.bmp','bmp'));     % Load image file
@@ -89,7 +90,6 @@ switch mode
         noisyCode = gf(noisyCode,m);                          % Create Galois array for rsdec()
     
     case "packetloss"
-        errorRate = 0.2;                                      % Error in [%]
         lostPackets = floor(errorRate * nPkts);               % Number of lost packets
         idx = randperm(nPkts, lostPackets);                   % Non-repeating random indices
         
