@@ -74,7 +74,7 @@ indexPad(1:length(index)) = index;
 packetMatrix = reshape(indexPad,k,nPkts)';
 
 %% Block 4 Reed Solomon encoding
-n = 2^m-1;n 
+n = 2^m-1;
 msgwords=gf(packetMatrix, m);
 codes = rsenc(msgwords,n,k);
 
@@ -98,7 +98,7 @@ switch mode
         noise = randi(n,row,col) .* randerr(row,col,t);       % Generate noise-matrix
         noisyCode = codewords + noise;                        % Convert to same data type and add noise 
     case "packetloss"
-        lostPackets = floor(errorRate * nPkts);               % Number of lost packets
+        lostPackets = floor(0.2 * nPkts);               % Number of lost packets
         idx = randperm(n, lostPackets);                       % Non-repeating random indices
         codewords(idx,:) = 0;                                 % Set entire row to zero if lost
         noisyCode = codewords;
@@ -167,8 +167,11 @@ for i=1:totHeight
     for j=1:totWidth
         block = idct2(RxDCTBlocks{i,j});
         IDCTBlocks((i-1)*L+1:i*L,(j-1)*L+1:j*L) = block; 
+        
     end
 end
+
+
 
 figure
 colormap gray
