@@ -5,7 +5,7 @@ R_comp = 0.5;                                 % Compression ratio
 L = 16;                                       % 16x16 pixels per block
 m = 8;                                        % Bits/sample
 k = 127;                                      % Symbols per packet
-errorRate = 0.03;                             % Lost packets [%]
+errorRate = 0.03;                              % Lost packets [%]
 
 %% Block 1
 originalImg = mat2gray(imread('lena.bmp','bmp'));     % Load image file
@@ -28,20 +28,11 @@ block = zeros(L);                               % Store the temporary block
 TxVec = zeros(1,floor((height^2)*R_comp));             % Store all coefficients in vector
 n=1;                                            % Iterator for TxVec
 
-% for i=1:totHeight       
-%     for j=1:totWidth   
-%        block = dct2(allBlocks{i,j});
-%        blockVec = zigzag(block);                    % Stolen algortithm , implement our own!!
-%        TxVec((n-1)*Nc+1:Nc*n) = blockVec(1:Nc);     % Compressed
-%        n = n+1; 
-%     end
-% end
-
 for i=1:totHeight       
     for j=1:totWidth   
        block = dct2(allBlocks{i,j});
-       blockVec = zigZagTest(block);                    % Stolen algortithm , implement our own!!
-       TxVec((n-1)*Nc+1:Nc*n) = blockVec;     % Compressed
+       blockVec = zigzag(block);                    % Stolen algortithm , implement our own!!
+       TxVec((n-1)*Nc+1:Nc*n) = blockVec(1:Nc);     % Compressed
        n = n+1; 
     end
 end
@@ -93,7 +84,7 @@ mode = "packetloss";      % 'biterrors' or 'packetloss'
 switch mode
     case "biterror"
 %         t = floor((n-k)/2);                                 % Number of erros per codeword
-        t = 100;
+        t = 65;
         nw = length(codewords);                               % Number of codewords
         noise = randi(n,row,col) .* randerr(row,col,t);       % Generate noise-matrix
         noisyCode = codewords + noise;                        % Convert to same data type and add noise 
@@ -172,8 +163,8 @@ end
 
 figure
 colormap gray
-imshow((IDCTBlocks))
-%title('Compressed')
+imshow(IDCTBlocks)
+title('Compressed')
 axis off;
 
 PSNR = psnr(IDCTBlocks, originalImg)         % PSNR in dB
